@@ -1,3 +1,4 @@
+
 # Sela Stock Management System
 
 A role-based stock management system built with Next.js, NextAuth.js, and PostgreSQL.
@@ -73,3 +74,5 @@ The application uses Prisma with the following models:
 ## License
 
 MIT
+
+
