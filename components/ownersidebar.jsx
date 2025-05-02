@@ -1,12 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 const OwnerSidebar = () => {
   const pathname = usePathname();
+  const [currentMonth, setCurrentMonth] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCurrentMonth();
+  }, []);
+
+  const fetchCurrentMonth = async () => {
+    try {
+      const response = await fetch('/api/month-selection');
+      if (response.ok) {
+        const data = await response.json();
+        setCurrentMonth(data);
+      }
+    } catch (error) {
+      console.error('Error fetching current month:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const lists = [
     {
@@ -23,6 +43,16 @@ const OwnerSidebar = () => {
       name: 'Staff Members',
       icon: 'Users',
       href: '/owner/staff'
+    },
+    {
+      name: 'Setted Months',
+      icon: 'Calendar',
+      href: '/owner/month-history'
+    },
+    {
+      name: 'Owner Fund',
+      icon: 'Money',
+      href: '/owner/fund'
     }
   ];
 

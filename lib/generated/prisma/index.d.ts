@@ -53,6 +53,16 @@ export type StockEntry = $Result.DefaultSelection<Prisma.$StockEntryPayload>
  * 
  */
 export type Staff = $Result.DefaultSelection<Prisma.$StaffPayload>
+/**
+ * Model OwnerFund
+ * 
+ */
+export type OwnerFund = $Result.DefaultSelection<Prisma.$OwnerFundPayload>
+/**
+ * Model ManagerExpense
+ * 
+ */
+export type ManagerExpense = $Result.DefaultSelection<Prisma.$ManagerExpensePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -258,6 +268,26 @@ export class PrismaClient<
     * ```
     */
   get staff(): Prisma.StaffDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ownerFund`: Exposes CRUD operations for the **OwnerFund** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OwnerFunds
+    * const ownerFunds = await prisma.ownerFund.findMany()
+    * ```
+    */
+  get ownerFund(): Prisma.OwnerFundDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.managerExpense`: Exposes CRUD operations for the **ManagerExpense** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ManagerExpenses
+    * const managerExpenses = await prisma.managerExpense.findMany()
+    * ```
+    */
+  get managerExpense(): Prisma.ManagerExpenseDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -705,7 +735,9 @@ export namespace Prisma {
     MonthSelection: 'MonthSelection',
     DailyReport: 'DailyReport',
     StockEntry: 'StockEntry',
-    Staff: 'Staff'
+    Staff: 'Staff',
+    OwnerFund: 'OwnerFund',
+    ManagerExpense: 'ManagerExpense'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -724,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "user" | "verificationToken" | "monthSelection" | "dailyReport" | "stockEntry" | "staff"
+      modelProps: "account" | "session" | "user" | "verificationToken" | "monthSelection" | "dailyReport" | "stockEntry" | "staff" | "ownerFund" | "managerExpense"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1320,6 +1352,154 @@ export namespace Prisma {
           }
         }
       }
+      OwnerFund: {
+        payload: Prisma.$OwnerFundPayload<ExtArgs>
+        fields: Prisma.OwnerFundFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OwnerFundFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OwnerFundFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          findFirst: {
+            args: Prisma.OwnerFundFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OwnerFundFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          findMany: {
+            args: Prisma.OwnerFundFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>[]
+          }
+          create: {
+            args: Prisma.OwnerFundCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          createMany: {
+            args: Prisma.OwnerFundCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OwnerFundCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>[]
+          }
+          delete: {
+            args: Prisma.OwnerFundDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          update: {
+            args: Prisma.OwnerFundUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          deleteMany: {
+            args: Prisma.OwnerFundDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OwnerFundUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OwnerFundUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>[]
+          }
+          upsert: {
+            args: Prisma.OwnerFundUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OwnerFundPayload>
+          }
+          aggregate: {
+            args: Prisma.OwnerFundAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOwnerFund>
+          }
+          groupBy: {
+            args: Prisma.OwnerFundGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OwnerFundGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OwnerFundCountArgs<ExtArgs>
+            result: $Utils.Optional<OwnerFundCountAggregateOutputType> | number
+          }
+        }
+      }
+      ManagerExpense: {
+        payload: Prisma.$ManagerExpensePayload<ExtArgs>
+        fields: Prisma.ManagerExpenseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ManagerExpenseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ManagerExpenseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          findFirst: {
+            args: Prisma.ManagerExpenseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ManagerExpenseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          findMany: {
+            args: Prisma.ManagerExpenseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>[]
+          }
+          create: {
+            args: Prisma.ManagerExpenseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          createMany: {
+            args: Prisma.ManagerExpenseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ManagerExpenseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>[]
+          }
+          delete: {
+            args: Prisma.ManagerExpenseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          update: {
+            args: Prisma.ManagerExpenseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          deleteMany: {
+            args: Prisma.ManagerExpenseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ManagerExpenseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ManagerExpenseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>[]
+          }
+          upsert: {
+            args: Prisma.ManagerExpenseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ManagerExpensePayload>
+          }
+          aggregate: {
+            args: Prisma.ManagerExpenseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateManagerExpense>
+          }
+          groupBy: {
+            args: Prisma.ManagerExpenseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ManagerExpenseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ManagerExpenseCountArgs<ExtArgs>
+            result: $Utils.Optional<ManagerExpenseCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1412,6 +1592,8 @@ export namespace Prisma {
     dailyReport?: DailyReportOmit
     stockEntry?: StockEntryOmit
     staff?: StaffOmit
+    ownerFund?: OwnerFundOmit
+    managerExpense?: ManagerExpenseOmit
   }
 
   /* Types for Logging */
@@ -1512,6 +1694,8 @@ export namespace Prisma {
     dailyReports: number
     stockEntries: number
     staff: number
+    ownerFunds: number
+    managerExpenses: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1521,6 +1705,8 @@ export namespace Prisma {
     dailyReports?: boolean | UserCountOutputTypeCountDailyReportsArgs
     stockEntries?: boolean | UserCountOutputTypeCountStockEntriesArgs
     staff?: boolean | UserCountOutputTypeCountStaffArgs
+    ownerFunds?: boolean | UserCountOutputTypeCountOwnerFundsArgs
+    managerExpenses?: boolean | UserCountOutputTypeCountManagerExpensesArgs
   }
 
   // Custom InputTypes
@@ -1574,6 +1760,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountStaffArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: StaffWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOwnerFundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OwnerFundWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountManagerExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ManagerExpenseWhereInput
   }
 
 
@@ -3815,8 +4015,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    monthlyFee: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    monthlyFee: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -3825,8 +4035,14 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    password: string | null
     role: string | null
     isOwner: boolean | null
+    country: string | null
+    monthlyFee: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3835,8 +4051,14 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    password: string | null
     role: string | null
     isOwner: boolean | null
+    country: string | null
+    monthlyFee: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3845,11 +4067,25 @@ export namespace Prisma {
     email: number
     emailVerified: number
     image: number
+    password: number
     role: number
     isOwner: number
+    country: number
+    monthlyFee: number
+    status: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    monthlyFee?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    monthlyFee?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -3857,8 +4093,14 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    password?: true
     role?: true
     isOwner?: true
+    country?: true
+    monthlyFee?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3867,8 +4109,14 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    password?: true
     role?: true
     isOwner?: true
+    country?: true
+    monthlyFee?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3877,8 +4125,14 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    password?: true
     role?: true
     isOwner?: true
+    country?: true
+    monthlyFee?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3920,6 +4174,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -3950,6 +4216,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -3960,9 +4228,17 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    password: string | null
     role: string
     isOwner: boolean
+    country: string | null
+    monthlyFee: number | null
+    status: string
+    createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -3987,14 +4263,22 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    password?: boolean
     role?: boolean
     isOwner?: boolean
+    country?: boolean
+    monthlyFee?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     monthSelections?: boolean | User$monthSelectionsArgs<ExtArgs>
     dailyReports?: boolean | User$dailyReportsArgs<ExtArgs>
     stockEntries?: boolean | User$stockEntriesArgs<ExtArgs>
     staff?: boolean | User$staffArgs<ExtArgs>
+    ownerFunds?: boolean | User$ownerFundsArgs<ExtArgs>
+    managerExpenses?: boolean | User$managerExpensesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4004,8 +4288,14 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    password?: boolean
     role?: boolean
     isOwner?: boolean
+    country?: boolean
+    monthlyFee?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4014,8 +4304,14 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    password?: boolean
     role?: boolean
     isOwner?: boolean
+    country?: boolean
+    monthlyFee?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -4024,11 +4320,17 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    password?: boolean
     role?: boolean
     isOwner?: boolean
+    country?: boolean
+    monthlyFee?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "isOwner", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role" | "isOwner" | "country" | "monthlyFee" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -4036,6 +4338,8 @@ export namespace Prisma {
     dailyReports?: boolean | User$dailyReportsArgs<ExtArgs>
     stockEntries?: boolean | User$stockEntriesArgs<ExtArgs>
     staff?: boolean | User$staffArgs<ExtArgs>
+    ownerFunds?: boolean | User$ownerFundsArgs<ExtArgs>
+    managerExpenses?: boolean | User$managerExpensesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4050,6 +4354,8 @@ export namespace Prisma {
       dailyReports: Prisma.$DailyReportPayload<ExtArgs>[]
       stockEntries: Prisma.$StockEntryPayload<ExtArgs>[]
       staff: Prisma.$StaffPayload<ExtArgs>[]
+      ownerFunds: Prisma.$OwnerFundPayload<ExtArgs>[]
+      managerExpenses: Prisma.$ManagerExpensePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4057,8 +4363,14 @@ export namespace Prisma {
       email: string | null
       emailVerified: Date | null
       image: string | null
+      password: string | null
       role: string
       isOwner: boolean
+      country: string | null
+      monthlyFee: number | null
+      status: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4459,6 +4771,8 @@ export namespace Prisma {
     dailyReports<T extends User$dailyReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     stockEntries<T extends User$stockEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$stockEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     staff<T extends User$staffArgs<ExtArgs> = {}>(args?: Subset<T, User$staffArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownerFunds<T extends User$ownerFundsArgs<ExtArgs> = {}>(args?: Subset<T, User$ownerFundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    managerExpenses<T extends User$managerExpensesArgs<ExtArgs> = {}>(args?: Subset<T, User$managerExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4493,8 +4807,14 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
     readonly isOwner: FieldRef<"User", 'Boolean'>
+    readonly country: FieldRef<"User", 'String'>
+    readonly monthlyFee: FieldRef<"User", 'Float'>
+    readonly status: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -4713,7 +5033,7 @@ export namespace Prisma {
     /**
      * The data needed to create a User.
      */
-    data?: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
   /**
@@ -5024,6 +5344,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: StaffScalarFieldEnum | StaffScalarFieldEnum[]
+  }
+
+  /**
+   * User.ownerFunds
+   */
+  export type User$ownerFundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    where?: OwnerFundWhereInput
+    orderBy?: OwnerFundOrderByWithRelationInput | OwnerFundOrderByWithRelationInput[]
+    cursor?: OwnerFundWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OwnerFundScalarFieldEnum | OwnerFundScalarFieldEnum[]
+  }
+
+  /**
+   * User.managerExpenses
+   */
+  export type User$managerExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    where?: ManagerExpenseWhereInput
+    orderBy?: ManagerExpenseOrderByWithRelationInput | ManagerExpenseOrderByWithRelationInput[]
+    cursor?: ManagerExpenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ManagerExpenseScalarFieldEnum | ManagerExpenseScalarFieldEnum[]
   }
 
   /**
@@ -10513,6 +10881,2242 @@ export namespace Prisma {
 
 
   /**
+   * Model OwnerFund
+   */
+
+  export type AggregateOwnerFund = {
+    _count: OwnerFundCountAggregateOutputType | null
+    _avg: OwnerFundAvgAggregateOutputType | null
+    _sum: OwnerFundSumAggregateOutputType | null
+    _min: OwnerFundMinAggregateOutputType | null
+    _max: OwnerFundMaxAggregateOutputType | null
+  }
+
+  export type OwnerFundAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OwnerFundSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OwnerFundMinAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    purpose: string | null
+    receipt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type OwnerFundMaxAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    purpose: string | null
+    receipt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type OwnerFundCountAggregateOutputType = {
+    id: number
+    amount: number
+    purpose: number
+    receipt: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type OwnerFundAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type OwnerFundSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type OwnerFundMinAggregateInputType = {
+    id?: true
+    amount?: true
+    purpose?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type OwnerFundMaxAggregateInputType = {
+    id?: true
+    amount?: true
+    purpose?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type OwnerFundCountAggregateInputType = {
+    id?: true
+    amount?: true
+    purpose?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type OwnerFundAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OwnerFund to aggregate.
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OwnerFunds to fetch.
+     */
+    orderBy?: OwnerFundOrderByWithRelationInput | OwnerFundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OwnerFundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OwnerFunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OwnerFunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OwnerFunds
+    **/
+    _count?: true | OwnerFundCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OwnerFundAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OwnerFundSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OwnerFundMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OwnerFundMaxAggregateInputType
+  }
+
+  export type GetOwnerFundAggregateType<T extends OwnerFundAggregateArgs> = {
+        [P in keyof T & keyof AggregateOwnerFund]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOwnerFund[P]>
+      : GetScalarType<T[P], AggregateOwnerFund[P]>
+  }
+
+
+
+
+  export type OwnerFundGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OwnerFundWhereInput
+    orderBy?: OwnerFundOrderByWithAggregationInput | OwnerFundOrderByWithAggregationInput[]
+    by: OwnerFundScalarFieldEnum[] | OwnerFundScalarFieldEnum
+    having?: OwnerFundScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OwnerFundCountAggregateInputType | true
+    _avg?: OwnerFundAvgAggregateInputType
+    _sum?: OwnerFundSumAggregateInputType
+    _min?: OwnerFundMinAggregateInputType
+    _max?: OwnerFundMaxAggregateInputType
+  }
+
+  export type OwnerFundGroupByOutputType = {
+    id: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    _count: OwnerFundCountAggregateOutputType | null
+    _avg: OwnerFundAvgAggregateOutputType | null
+    _sum: OwnerFundSumAggregateOutputType | null
+    _min: OwnerFundMinAggregateOutputType | null
+    _max: OwnerFundMaxAggregateOutputType | null
+  }
+
+  type GetOwnerFundGroupByPayload<T extends OwnerFundGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OwnerFundGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OwnerFundGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OwnerFundGroupByOutputType[P]>
+            : GetScalarType<T[P], OwnerFundGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OwnerFundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    purpose?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ownerFund"]>
+
+  export type OwnerFundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    purpose?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ownerFund"]>
+
+  export type OwnerFundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    purpose?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ownerFund"]>
+
+  export type OwnerFundSelectScalar = {
+    id?: boolean
+    amount?: boolean
+    purpose?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+  }
+
+  export type OwnerFundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "purpose" | "receipt" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["ownerFund"]>
+  export type OwnerFundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OwnerFundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OwnerFundIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $OwnerFundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OwnerFund"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      amount: number
+      purpose: string
+      receipt: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+    }, ExtArgs["result"]["ownerFund"]>
+    composites: {}
+  }
+
+  type OwnerFundGetPayload<S extends boolean | null | undefined | OwnerFundDefaultArgs> = $Result.GetResult<Prisma.$OwnerFundPayload, S>
+
+  type OwnerFundCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OwnerFundFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OwnerFundCountAggregateInputType | true
+    }
+
+  export interface OwnerFundDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OwnerFund'], meta: { name: 'OwnerFund' } }
+    /**
+     * Find zero or one OwnerFund that matches the filter.
+     * @param {OwnerFundFindUniqueArgs} args - Arguments to find a OwnerFund
+     * @example
+     * // Get one OwnerFund
+     * const ownerFund = await prisma.ownerFund.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OwnerFundFindUniqueArgs>(args: SelectSubset<T, OwnerFundFindUniqueArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OwnerFund that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OwnerFundFindUniqueOrThrowArgs} args - Arguments to find a OwnerFund
+     * @example
+     * // Get one OwnerFund
+     * const ownerFund = await prisma.ownerFund.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OwnerFundFindUniqueOrThrowArgs>(args: SelectSubset<T, OwnerFundFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OwnerFund that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundFindFirstArgs} args - Arguments to find a OwnerFund
+     * @example
+     * // Get one OwnerFund
+     * const ownerFund = await prisma.ownerFund.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OwnerFundFindFirstArgs>(args?: SelectSubset<T, OwnerFundFindFirstArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OwnerFund that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundFindFirstOrThrowArgs} args - Arguments to find a OwnerFund
+     * @example
+     * // Get one OwnerFund
+     * const ownerFund = await prisma.ownerFund.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OwnerFundFindFirstOrThrowArgs>(args?: SelectSubset<T, OwnerFundFindFirstOrThrowArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OwnerFunds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OwnerFunds
+     * const ownerFunds = await prisma.ownerFund.findMany()
+     * 
+     * // Get first 10 OwnerFunds
+     * const ownerFunds = await prisma.ownerFund.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ownerFundWithIdOnly = await prisma.ownerFund.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OwnerFundFindManyArgs>(args?: SelectSubset<T, OwnerFundFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OwnerFund.
+     * @param {OwnerFundCreateArgs} args - Arguments to create a OwnerFund.
+     * @example
+     * // Create one OwnerFund
+     * const OwnerFund = await prisma.ownerFund.create({
+     *   data: {
+     *     // ... data to create a OwnerFund
+     *   }
+     * })
+     * 
+     */
+    create<T extends OwnerFundCreateArgs>(args: SelectSubset<T, OwnerFundCreateArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OwnerFunds.
+     * @param {OwnerFundCreateManyArgs} args - Arguments to create many OwnerFunds.
+     * @example
+     * // Create many OwnerFunds
+     * const ownerFund = await prisma.ownerFund.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OwnerFundCreateManyArgs>(args?: SelectSubset<T, OwnerFundCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OwnerFunds and returns the data saved in the database.
+     * @param {OwnerFundCreateManyAndReturnArgs} args - Arguments to create many OwnerFunds.
+     * @example
+     * // Create many OwnerFunds
+     * const ownerFund = await prisma.ownerFund.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OwnerFunds and only return the `id`
+     * const ownerFundWithIdOnly = await prisma.ownerFund.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OwnerFundCreateManyAndReturnArgs>(args?: SelectSubset<T, OwnerFundCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OwnerFund.
+     * @param {OwnerFundDeleteArgs} args - Arguments to delete one OwnerFund.
+     * @example
+     * // Delete one OwnerFund
+     * const OwnerFund = await prisma.ownerFund.delete({
+     *   where: {
+     *     // ... filter to delete one OwnerFund
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OwnerFundDeleteArgs>(args: SelectSubset<T, OwnerFundDeleteArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OwnerFund.
+     * @param {OwnerFundUpdateArgs} args - Arguments to update one OwnerFund.
+     * @example
+     * // Update one OwnerFund
+     * const ownerFund = await prisma.ownerFund.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OwnerFundUpdateArgs>(args: SelectSubset<T, OwnerFundUpdateArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OwnerFunds.
+     * @param {OwnerFundDeleteManyArgs} args - Arguments to filter OwnerFunds to delete.
+     * @example
+     * // Delete a few OwnerFunds
+     * const { count } = await prisma.ownerFund.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OwnerFundDeleteManyArgs>(args?: SelectSubset<T, OwnerFundDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OwnerFunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OwnerFunds
+     * const ownerFund = await prisma.ownerFund.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OwnerFundUpdateManyArgs>(args: SelectSubset<T, OwnerFundUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OwnerFunds and returns the data updated in the database.
+     * @param {OwnerFundUpdateManyAndReturnArgs} args - Arguments to update many OwnerFunds.
+     * @example
+     * // Update many OwnerFunds
+     * const ownerFund = await prisma.ownerFund.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OwnerFunds and only return the `id`
+     * const ownerFundWithIdOnly = await prisma.ownerFund.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OwnerFundUpdateManyAndReturnArgs>(args: SelectSubset<T, OwnerFundUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OwnerFund.
+     * @param {OwnerFundUpsertArgs} args - Arguments to update or create a OwnerFund.
+     * @example
+     * // Update or create a OwnerFund
+     * const ownerFund = await prisma.ownerFund.upsert({
+     *   create: {
+     *     // ... data to create a OwnerFund
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OwnerFund we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OwnerFundUpsertArgs>(args: SelectSubset<T, OwnerFundUpsertArgs<ExtArgs>>): Prisma__OwnerFundClient<$Result.GetResult<Prisma.$OwnerFundPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OwnerFunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundCountArgs} args - Arguments to filter OwnerFunds to count.
+     * @example
+     * // Count the number of OwnerFunds
+     * const count = await prisma.ownerFund.count({
+     *   where: {
+     *     // ... the filter for the OwnerFunds we want to count
+     *   }
+     * })
+    **/
+    count<T extends OwnerFundCountArgs>(
+      args?: Subset<T, OwnerFundCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OwnerFundCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OwnerFund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OwnerFundAggregateArgs>(args: Subset<T, OwnerFundAggregateArgs>): Prisma.PrismaPromise<GetOwnerFundAggregateType<T>>
+
+    /**
+     * Group by OwnerFund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OwnerFundGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OwnerFundGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OwnerFundGroupByArgs['orderBy'] }
+        : { orderBy?: OwnerFundGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OwnerFundGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOwnerFundGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OwnerFund model
+   */
+  readonly fields: OwnerFundFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OwnerFund.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OwnerFundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OwnerFund model
+   */
+  interface OwnerFundFieldRefs {
+    readonly id: FieldRef<"OwnerFund", 'String'>
+    readonly amount: FieldRef<"OwnerFund", 'Float'>
+    readonly purpose: FieldRef<"OwnerFund", 'String'>
+    readonly receipt: FieldRef<"OwnerFund", 'String'>
+    readonly createdAt: FieldRef<"OwnerFund", 'DateTime'>
+    readonly updatedAt: FieldRef<"OwnerFund", 'DateTime'>
+    readonly userId: FieldRef<"OwnerFund", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OwnerFund findUnique
+   */
+  export type OwnerFundFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter, which OwnerFund to fetch.
+     */
+    where: OwnerFundWhereUniqueInput
+  }
+
+  /**
+   * OwnerFund findUniqueOrThrow
+   */
+  export type OwnerFundFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter, which OwnerFund to fetch.
+     */
+    where: OwnerFundWhereUniqueInput
+  }
+
+  /**
+   * OwnerFund findFirst
+   */
+  export type OwnerFundFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter, which OwnerFund to fetch.
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OwnerFunds to fetch.
+     */
+    orderBy?: OwnerFundOrderByWithRelationInput | OwnerFundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OwnerFunds.
+     */
+    cursor?: OwnerFundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OwnerFunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OwnerFunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OwnerFunds.
+     */
+    distinct?: OwnerFundScalarFieldEnum | OwnerFundScalarFieldEnum[]
+  }
+
+  /**
+   * OwnerFund findFirstOrThrow
+   */
+  export type OwnerFundFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter, which OwnerFund to fetch.
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OwnerFunds to fetch.
+     */
+    orderBy?: OwnerFundOrderByWithRelationInput | OwnerFundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OwnerFunds.
+     */
+    cursor?: OwnerFundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OwnerFunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OwnerFunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OwnerFunds.
+     */
+    distinct?: OwnerFundScalarFieldEnum | OwnerFundScalarFieldEnum[]
+  }
+
+  /**
+   * OwnerFund findMany
+   */
+  export type OwnerFundFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter, which OwnerFunds to fetch.
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OwnerFunds to fetch.
+     */
+    orderBy?: OwnerFundOrderByWithRelationInput | OwnerFundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OwnerFunds.
+     */
+    cursor?: OwnerFundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OwnerFunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OwnerFunds.
+     */
+    skip?: number
+    distinct?: OwnerFundScalarFieldEnum | OwnerFundScalarFieldEnum[]
+  }
+
+  /**
+   * OwnerFund create
+   */
+  export type OwnerFundCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OwnerFund.
+     */
+    data: XOR<OwnerFundCreateInput, OwnerFundUncheckedCreateInput>
+  }
+
+  /**
+   * OwnerFund createMany
+   */
+  export type OwnerFundCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OwnerFunds.
+     */
+    data: OwnerFundCreateManyInput | OwnerFundCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OwnerFund createManyAndReturn
+   */
+  export type OwnerFundCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * The data used to create many OwnerFunds.
+     */
+    data: OwnerFundCreateManyInput | OwnerFundCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OwnerFund update
+   */
+  export type OwnerFundUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OwnerFund.
+     */
+    data: XOR<OwnerFundUpdateInput, OwnerFundUncheckedUpdateInput>
+    /**
+     * Choose, which OwnerFund to update.
+     */
+    where: OwnerFundWhereUniqueInput
+  }
+
+  /**
+   * OwnerFund updateMany
+   */
+  export type OwnerFundUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OwnerFunds.
+     */
+    data: XOR<OwnerFundUpdateManyMutationInput, OwnerFundUncheckedUpdateManyInput>
+    /**
+     * Filter which OwnerFunds to update
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * Limit how many OwnerFunds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OwnerFund updateManyAndReturn
+   */
+  export type OwnerFundUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * The data used to update OwnerFunds.
+     */
+    data: XOR<OwnerFundUpdateManyMutationInput, OwnerFundUncheckedUpdateManyInput>
+    /**
+     * Filter which OwnerFunds to update
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * Limit how many OwnerFunds to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OwnerFund upsert
+   */
+  export type OwnerFundUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OwnerFund to update in case it exists.
+     */
+    where: OwnerFundWhereUniqueInput
+    /**
+     * In case the OwnerFund found by the `where` argument doesn't exist, create a new OwnerFund with this data.
+     */
+    create: XOR<OwnerFundCreateInput, OwnerFundUncheckedCreateInput>
+    /**
+     * In case the OwnerFund was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OwnerFundUpdateInput, OwnerFundUncheckedUpdateInput>
+  }
+
+  /**
+   * OwnerFund delete
+   */
+  export type OwnerFundDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+    /**
+     * Filter which OwnerFund to delete.
+     */
+    where: OwnerFundWhereUniqueInput
+  }
+
+  /**
+   * OwnerFund deleteMany
+   */
+  export type OwnerFundDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OwnerFunds to delete
+     */
+    where?: OwnerFundWhereInput
+    /**
+     * Limit how many OwnerFunds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OwnerFund without action
+   */
+  export type OwnerFundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OwnerFund
+     */
+    select?: OwnerFundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OwnerFund
+     */
+    omit?: OwnerFundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OwnerFundInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ManagerExpense
+   */
+
+  export type AggregateManagerExpense = {
+    _count: ManagerExpenseCountAggregateOutputType | null
+    _avg: ManagerExpenseAvgAggregateOutputType | null
+    _sum: ManagerExpenseSumAggregateOutputType | null
+    _min: ManagerExpenseMinAggregateOutputType | null
+    _max: ManagerExpenseMaxAggregateOutputType | null
+  }
+
+  export type ManagerExpenseAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ManagerExpenseSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type ManagerExpenseMinAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    description: string | null
+    receipt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    managerId: string | null
+  }
+
+  export type ManagerExpenseMaxAggregateOutputType = {
+    id: string | null
+    amount: number | null
+    description: string | null
+    receipt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    managerId: string | null
+  }
+
+  export type ManagerExpenseCountAggregateOutputType = {
+    id: number
+    amount: number
+    description: number
+    receipt: number
+    createdAt: number
+    updatedAt: number
+    managerId: number
+    _all: number
+  }
+
+
+  export type ManagerExpenseAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type ManagerExpenseSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type ManagerExpenseMinAggregateInputType = {
+    id?: true
+    amount?: true
+    description?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    managerId?: true
+  }
+
+  export type ManagerExpenseMaxAggregateInputType = {
+    id?: true
+    amount?: true
+    description?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    managerId?: true
+  }
+
+  export type ManagerExpenseCountAggregateInputType = {
+    id?: true
+    amount?: true
+    description?: true
+    receipt?: true
+    createdAt?: true
+    updatedAt?: true
+    managerId?: true
+    _all?: true
+  }
+
+  export type ManagerExpenseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ManagerExpense to aggregate.
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ManagerExpenses to fetch.
+     */
+    orderBy?: ManagerExpenseOrderByWithRelationInput | ManagerExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ManagerExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ManagerExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ManagerExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ManagerExpenses
+    **/
+    _count?: true | ManagerExpenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ManagerExpenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ManagerExpenseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ManagerExpenseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ManagerExpenseMaxAggregateInputType
+  }
+
+  export type GetManagerExpenseAggregateType<T extends ManagerExpenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateManagerExpense]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateManagerExpense[P]>
+      : GetScalarType<T[P], AggregateManagerExpense[P]>
+  }
+
+
+
+
+  export type ManagerExpenseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ManagerExpenseWhereInput
+    orderBy?: ManagerExpenseOrderByWithAggregationInput | ManagerExpenseOrderByWithAggregationInput[]
+    by: ManagerExpenseScalarFieldEnum[] | ManagerExpenseScalarFieldEnum
+    having?: ManagerExpenseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ManagerExpenseCountAggregateInputType | true
+    _avg?: ManagerExpenseAvgAggregateInputType
+    _sum?: ManagerExpenseSumAggregateInputType
+    _min?: ManagerExpenseMinAggregateInputType
+    _max?: ManagerExpenseMaxAggregateInputType
+  }
+
+  export type ManagerExpenseGroupByOutputType = {
+    id: string
+    amount: number
+    description: string
+    receipt: string | null
+    createdAt: Date
+    updatedAt: Date
+    managerId: string
+    _count: ManagerExpenseCountAggregateOutputType | null
+    _avg: ManagerExpenseAvgAggregateOutputType | null
+    _sum: ManagerExpenseSumAggregateOutputType | null
+    _min: ManagerExpenseMinAggregateOutputType | null
+    _max: ManagerExpenseMaxAggregateOutputType | null
+  }
+
+  type GetManagerExpenseGroupByPayload<T extends ManagerExpenseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ManagerExpenseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ManagerExpenseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ManagerExpenseGroupByOutputType[P]>
+            : GetScalarType<T[P], ManagerExpenseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ManagerExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    description?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    managerId?: boolean
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["managerExpense"]>
+
+  export type ManagerExpenseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    description?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    managerId?: boolean
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["managerExpense"]>
+
+  export type ManagerExpenseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    amount?: boolean
+    description?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    managerId?: boolean
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["managerExpense"]>
+
+  export type ManagerExpenseSelectScalar = {
+    id?: boolean
+    amount?: boolean
+    description?: boolean
+    receipt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    managerId?: boolean
+  }
+
+  export type ManagerExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "description" | "receipt" | "createdAt" | "updatedAt" | "managerId", ExtArgs["result"]["managerExpense"]>
+  export type ManagerExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ManagerExpenseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ManagerExpenseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    manager?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ManagerExpensePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ManagerExpense"
+    objects: {
+      manager: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      amount: number
+      description: string
+      receipt: string | null
+      createdAt: Date
+      updatedAt: Date
+      managerId: string
+    }, ExtArgs["result"]["managerExpense"]>
+    composites: {}
+  }
+
+  type ManagerExpenseGetPayload<S extends boolean | null | undefined | ManagerExpenseDefaultArgs> = $Result.GetResult<Prisma.$ManagerExpensePayload, S>
+
+  type ManagerExpenseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ManagerExpenseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ManagerExpenseCountAggregateInputType | true
+    }
+
+  export interface ManagerExpenseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ManagerExpense'], meta: { name: 'ManagerExpense' } }
+    /**
+     * Find zero or one ManagerExpense that matches the filter.
+     * @param {ManagerExpenseFindUniqueArgs} args - Arguments to find a ManagerExpense
+     * @example
+     * // Get one ManagerExpense
+     * const managerExpense = await prisma.managerExpense.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ManagerExpenseFindUniqueArgs>(args: SelectSubset<T, ManagerExpenseFindUniqueArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ManagerExpense that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ManagerExpenseFindUniqueOrThrowArgs} args - Arguments to find a ManagerExpense
+     * @example
+     * // Get one ManagerExpense
+     * const managerExpense = await prisma.managerExpense.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ManagerExpenseFindUniqueOrThrowArgs>(args: SelectSubset<T, ManagerExpenseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ManagerExpense that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseFindFirstArgs} args - Arguments to find a ManagerExpense
+     * @example
+     * // Get one ManagerExpense
+     * const managerExpense = await prisma.managerExpense.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ManagerExpenseFindFirstArgs>(args?: SelectSubset<T, ManagerExpenseFindFirstArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ManagerExpense that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseFindFirstOrThrowArgs} args - Arguments to find a ManagerExpense
+     * @example
+     * // Get one ManagerExpense
+     * const managerExpense = await prisma.managerExpense.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ManagerExpenseFindFirstOrThrowArgs>(args?: SelectSubset<T, ManagerExpenseFindFirstOrThrowArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ManagerExpenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ManagerExpenses
+     * const managerExpenses = await prisma.managerExpense.findMany()
+     * 
+     * // Get first 10 ManagerExpenses
+     * const managerExpenses = await prisma.managerExpense.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const managerExpenseWithIdOnly = await prisma.managerExpense.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ManagerExpenseFindManyArgs>(args?: SelectSubset<T, ManagerExpenseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ManagerExpense.
+     * @param {ManagerExpenseCreateArgs} args - Arguments to create a ManagerExpense.
+     * @example
+     * // Create one ManagerExpense
+     * const ManagerExpense = await prisma.managerExpense.create({
+     *   data: {
+     *     // ... data to create a ManagerExpense
+     *   }
+     * })
+     * 
+     */
+    create<T extends ManagerExpenseCreateArgs>(args: SelectSubset<T, ManagerExpenseCreateArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ManagerExpenses.
+     * @param {ManagerExpenseCreateManyArgs} args - Arguments to create many ManagerExpenses.
+     * @example
+     * // Create many ManagerExpenses
+     * const managerExpense = await prisma.managerExpense.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ManagerExpenseCreateManyArgs>(args?: SelectSubset<T, ManagerExpenseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ManagerExpenses and returns the data saved in the database.
+     * @param {ManagerExpenseCreateManyAndReturnArgs} args - Arguments to create many ManagerExpenses.
+     * @example
+     * // Create many ManagerExpenses
+     * const managerExpense = await prisma.managerExpense.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ManagerExpenses and only return the `id`
+     * const managerExpenseWithIdOnly = await prisma.managerExpense.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ManagerExpenseCreateManyAndReturnArgs>(args?: SelectSubset<T, ManagerExpenseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ManagerExpense.
+     * @param {ManagerExpenseDeleteArgs} args - Arguments to delete one ManagerExpense.
+     * @example
+     * // Delete one ManagerExpense
+     * const ManagerExpense = await prisma.managerExpense.delete({
+     *   where: {
+     *     // ... filter to delete one ManagerExpense
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ManagerExpenseDeleteArgs>(args: SelectSubset<T, ManagerExpenseDeleteArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ManagerExpense.
+     * @param {ManagerExpenseUpdateArgs} args - Arguments to update one ManagerExpense.
+     * @example
+     * // Update one ManagerExpense
+     * const managerExpense = await prisma.managerExpense.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ManagerExpenseUpdateArgs>(args: SelectSubset<T, ManagerExpenseUpdateArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ManagerExpenses.
+     * @param {ManagerExpenseDeleteManyArgs} args - Arguments to filter ManagerExpenses to delete.
+     * @example
+     * // Delete a few ManagerExpenses
+     * const { count } = await prisma.managerExpense.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ManagerExpenseDeleteManyArgs>(args?: SelectSubset<T, ManagerExpenseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ManagerExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ManagerExpenses
+     * const managerExpense = await prisma.managerExpense.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ManagerExpenseUpdateManyArgs>(args: SelectSubset<T, ManagerExpenseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ManagerExpenses and returns the data updated in the database.
+     * @param {ManagerExpenseUpdateManyAndReturnArgs} args - Arguments to update many ManagerExpenses.
+     * @example
+     * // Update many ManagerExpenses
+     * const managerExpense = await prisma.managerExpense.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ManagerExpenses and only return the `id`
+     * const managerExpenseWithIdOnly = await prisma.managerExpense.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ManagerExpenseUpdateManyAndReturnArgs>(args: SelectSubset<T, ManagerExpenseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ManagerExpense.
+     * @param {ManagerExpenseUpsertArgs} args - Arguments to update or create a ManagerExpense.
+     * @example
+     * // Update or create a ManagerExpense
+     * const managerExpense = await prisma.managerExpense.upsert({
+     *   create: {
+     *     // ... data to create a ManagerExpense
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ManagerExpense we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ManagerExpenseUpsertArgs>(args: SelectSubset<T, ManagerExpenseUpsertArgs<ExtArgs>>): Prisma__ManagerExpenseClient<$Result.GetResult<Prisma.$ManagerExpensePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ManagerExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseCountArgs} args - Arguments to filter ManagerExpenses to count.
+     * @example
+     * // Count the number of ManagerExpenses
+     * const count = await prisma.managerExpense.count({
+     *   where: {
+     *     // ... the filter for the ManagerExpenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ManagerExpenseCountArgs>(
+      args?: Subset<T, ManagerExpenseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ManagerExpenseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ManagerExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ManagerExpenseAggregateArgs>(args: Subset<T, ManagerExpenseAggregateArgs>): Prisma.PrismaPromise<GetManagerExpenseAggregateType<T>>
+
+    /**
+     * Group by ManagerExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ManagerExpenseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ManagerExpenseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ManagerExpenseGroupByArgs['orderBy'] }
+        : { orderBy?: ManagerExpenseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ManagerExpenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetManagerExpenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ManagerExpense model
+   */
+  readonly fields: ManagerExpenseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ManagerExpense.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ManagerExpenseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    manager<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ManagerExpense model
+   */
+  interface ManagerExpenseFieldRefs {
+    readonly id: FieldRef<"ManagerExpense", 'String'>
+    readonly amount: FieldRef<"ManagerExpense", 'Float'>
+    readonly description: FieldRef<"ManagerExpense", 'String'>
+    readonly receipt: FieldRef<"ManagerExpense", 'String'>
+    readonly createdAt: FieldRef<"ManagerExpense", 'DateTime'>
+    readonly updatedAt: FieldRef<"ManagerExpense", 'DateTime'>
+    readonly managerId: FieldRef<"ManagerExpense", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ManagerExpense findUnique
+   */
+  export type ManagerExpenseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ManagerExpense to fetch.
+     */
+    where: ManagerExpenseWhereUniqueInput
+  }
+
+  /**
+   * ManagerExpense findUniqueOrThrow
+   */
+  export type ManagerExpenseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ManagerExpense to fetch.
+     */
+    where: ManagerExpenseWhereUniqueInput
+  }
+
+  /**
+   * ManagerExpense findFirst
+   */
+  export type ManagerExpenseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ManagerExpense to fetch.
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ManagerExpenses to fetch.
+     */
+    orderBy?: ManagerExpenseOrderByWithRelationInput | ManagerExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ManagerExpenses.
+     */
+    cursor?: ManagerExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ManagerExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ManagerExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ManagerExpenses.
+     */
+    distinct?: ManagerExpenseScalarFieldEnum | ManagerExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ManagerExpense findFirstOrThrow
+   */
+  export type ManagerExpenseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ManagerExpense to fetch.
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ManagerExpenses to fetch.
+     */
+    orderBy?: ManagerExpenseOrderByWithRelationInput | ManagerExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ManagerExpenses.
+     */
+    cursor?: ManagerExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ManagerExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ManagerExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ManagerExpenses.
+     */
+    distinct?: ManagerExpenseScalarFieldEnum | ManagerExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ManagerExpense findMany
+   */
+  export type ManagerExpenseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ManagerExpenses to fetch.
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ManagerExpenses to fetch.
+     */
+    orderBy?: ManagerExpenseOrderByWithRelationInput | ManagerExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ManagerExpenses.
+     */
+    cursor?: ManagerExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ManagerExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ManagerExpenses.
+     */
+    skip?: number
+    distinct?: ManagerExpenseScalarFieldEnum | ManagerExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ManagerExpense create
+   */
+  export type ManagerExpenseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ManagerExpense.
+     */
+    data: XOR<ManagerExpenseCreateInput, ManagerExpenseUncheckedCreateInput>
+  }
+
+  /**
+   * ManagerExpense createMany
+   */
+  export type ManagerExpenseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ManagerExpenses.
+     */
+    data: ManagerExpenseCreateManyInput | ManagerExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ManagerExpense createManyAndReturn
+   */
+  export type ManagerExpenseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to create many ManagerExpenses.
+     */
+    data: ManagerExpenseCreateManyInput | ManagerExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ManagerExpense update
+   */
+  export type ManagerExpenseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ManagerExpense.
+     */
+    data: XOR<ManagerExpenseUpdateInput, ManagerExpenseUncheckedUpdateInput>
+    /**
+     * Choose, which ManagerExpense to update.
+     */
+    where: ManagerExpenseWhereUniqueInput
+  }
+
+  /**
+   * ManagerExpense updateMany
+   */
+  export type ManagerExpenseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ManagerExpenses.
+     */
+    data: XOR<ManagerExpenseUpdateManyMutationInput, ManagerExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which ManagerExpenses to update
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * Limit how many ManagerExpenses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ManagerExpense updateManyAndReturn
+   */
+  export type ManagerExpenseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to update ManagerExpenses.
+     */
+    data: XOR<ManagerExpenseUpdateManyMutationInput, ManagerExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which ManagerExpenses to update
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * Limit how many ManagerExpenses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ManagerExpense upsert
+   */
+  export type ManagerExpenseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ManagerExpense to update in case it exists.
+     */
+    where: ManagerExpenseWhereUniqueInput
+    /**
+     * In case the ManagerExpense found by the `where` argument doesn't exist, create a new ManagerExpense with this data.
+     */
+    create: XOR<ManagerExpenseCreateInput, ManagerExpenseUncheckedCreateInput>
+    /**
+     * In case the ManagerExpense was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ManagerExpenseUpdateInput, ManagerExpenseUncheckedUpdateInput>
+  }
+
+  /**
+   * ManagerExpense delete
+   */
+  export type ManagerExpenseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+    /**
+     * Filter which ManagerExpense to delete.
+     */
+    where: ManagerExpenseWhereUniqueInput
+  }
+
+  /**
+   * ManagerExpense deleteMany
+   */
+  export type ManagerExpenseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ManagerExpenses to delete
+     */
+    where?: ManagerExpenseWhereInput
+    /**
+     * Limit how many ManagerExpenses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ManagerExpense without action
+   */
+  export type ManagerExpenseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ManagerExpense
+     */
+    select?: ManagerExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ManagerExpense
+     */
+    omit?: ManagerExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ManagerExpenseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10560,8 +13164,14 @@ export namespace Prisma {
     email: 'email',
     emailVerified: 'emailVerified',
     image: 'image',
+    password: 'password',
     role: 'role',
-    isOwner: 'isOwner'
+    isOwner: 'isOwner',
+    country: 'country',
+    monthlyFee: 'monthlyFee',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -10630,6 +13240,32 @@ export namespace Prisma {
   };
 
   export type StaffScalarFieldEnum = (typeof StaffScalarFieldEnum)[keyof typeof StaffScalarFieldEnum]
+
+
+  export const OwnerFundScalarFieldEnum: {
+    id: 'id',
+    amount: 'amount',
+    purpose: 'purpose',
+    receipt: 'receipt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
+  };
+
+  export type OwnerFundScalarFieldEnum = (typeof OwnerFundScalarFieldEnum)[keyof typeof OwnerFundScalarFieldEnum]
+
+
+  export const ManagerExpenseScalarFieldEnum: {
+    id: 'id',
+    amount: 'amount',
+    description: 'description',
+    receipt: 'receipt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    managerId: 'managerId'
+  };
+
+  export type ManagerExpenseScalarFieldEnum = (typeof ManagerExpenseScalarFieldEnum)[keyof typeof ManagerExpenseScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10909,14 +13545,22 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     isOwner?: BoolFilter<"User"> | boolean
+    country?: StringNullableFilter<"User"> | string | null
+    monthlyFee?: FloatNullableFilter<"User"> | number | null
+    status?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     monthSelections?: MonthSelectionListRelationFilter
     dailyReports?: DailyReportListRelationFilter
     stockEntries?: StockEntryListRelationFilter
     staff?: StaffListRelationFilter
+    ownerFunds?: OwnerFundListRelationFilter
+    managerExpenses?: ManagerExpenseListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10925,14 +13569,22 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     role?: SortOrder
     isOwner?: SortOrder
+    country?: SortOrderInput | SortOrder
+    monthlyFee?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     monthSelections?: MonthSelectionOrderByRelationAggregateInput
     dailyReports?: DailyReportOrderByRelationAggregateInput
     stockEntries?: StockEntryOrderByRelationAggregateInput
     staff?: StaffOrderByRelationAggregateInput
+    ownerFunds?: OwnerFundOrderByRelationAggregateInput
+    managerExpenses?: ManagerExpenseOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10944,14 +13596,22 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     isOwner?: BoolFilter<"User"> | boolean
+    country?: StringNullableFilter<"User"> | string | null
+    monthlyFee?: FloatNullableFilter<"User"> | number | null
+    status?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     monthSelections?: MonthSelectionListRelationFilter
     dailyReports?: DailyReportListRelationFilter
     stockEntries?: StockEntryListRelationFilter
     staff?: StaffListRelationFilter
+    ownerFunds?: OwnerFundListRelationFilter
+    managerExpenses?: ManagerExpenseListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10960,11 +13620,19 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     role?: SortOrder
     isOwner?: SortOrder
+    country?: SortOrderInput | SortOrder
+    monthlyFee?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -10976,8 +13644,14 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: StringWithAggregatesFilter<"User"> | string
     isOwner?: BoolWithAggregatesFilter<"User"> | boolean
+    country?: StringNullableWithAggregatesFilter<"User"> | string | null
+    monthlyFee?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    status?: StringWithAggregatesFilter<"User"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type VerificationTokenWhereInput = {
@@ -11309,6 +13983,140 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"Staff"> | string
   }
 
+  export type OwnerFundWhereInput = {
+    AND?: OwnerFundWhereInput | OwnerFundWhereInput[]
+    OR?: OwnerFundWhereInput[]
+    NOT?: OwnerFundWhereInput | OwnerFundWhereInput[]
+    id?: StringFilter<"OwnerFund"> | string
+    amount?: FloatFilter<"OwnerFund"> | number
+    purpose?: StringFilter<"OwnerFund"> | string
+    receipt?: StringFilter<"OwnerFund"> | string
+    createdAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    updatedAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    userId?: StringFilter<"OwnerFund"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type OwnerFundOrderByWithRelationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    purpose?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type OwnerFundWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OwnerFundWhereInput | OwnerFundWhereInput[]
+    OR?: OwnerFundWhereInput[]
+    NOT?: OwnerFundWhereInput | OwnerFundWhereInput[]
+    amount?: FloatFilter<"OwnerFund"> | number
+    purpose?: StringFilter<"OwnerFund"> | string
+    receipt?: StringFilter<"OwnerFund"> | string
+    createdAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    updatedAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    userId?: StringFilter<"OwnerFund"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type OwnerFundOrderByWithAggregationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    purpose?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    _count?: OwnerFundCountOrderByAggregateInput
+    _avg?: OwnerFundAvgOrderByAggregateInput
+    _max?: OwnerFundMaxOrderByAggregateInput
+    _min?: OwnerFundMinOrderByAggregateInput
+    _sum?: OwnerFundSumOrderByAggregateInput
+  }
+
+  export type OwnerFundScalarWhereWithAggregatesInput = {
+    AND?: OwnerFundScalarWhereWithAggregatesInput | OwnerFundScalarWhereWithAggregatesInput[]
+    OR?: OwnerFundScalarWhereWithAggregatesInput[]
+    NOT?: OwnerFundScalarWhereWithAggregatesInput | OwnerFundScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OwnerFund"> | string
+    amount?: FloatWithAggregatesFilter<"OwnerFund"> | number
+    purpose?: StringWithAggregatesFilter<"OwnerFund"> | string
+    receipt?: StringWithAggregatesFilter<"OwnerFund"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"OwnerFund"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"OwnerFund"> | Date | string
+    userId?: StringWithAggregatesFilter<"OwnerFund"> | string
+  }
+
+  export type ManagerExpenseWhereInput = {
+    AND?: ManagerExpenseWhereInput | ManagerExpenseWhereInput[]
+    OR?: ManagerExpenseWhereInput[]
+    NOT?: ManagerExpenseWhereInput | ManagerExpenseWhereInput[]
+    id?: StringFilter<"ManagerExpense"> | string
+    amount?: FloatFilter<"ManagerExpense"> | number
+    description?: StringFilter<"ManagerExpense"> | string
+    receipt?: StringNullableFilter<"ManagerExpense"> | string | null
+    createdAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    managerId?: StringFilter<"ManagerExpense"> | string
+    manager?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ManagerExpenseOrderByWithRelationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    receipt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    managerId?: SortOrder
+    manager?: UserOrderByWithRelationInput
+  }
+
+  export type ManagerExpenseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ManagerExpenseWhereInput | ManagerExpenseWhereInput[]
+    OR?: ManagerExpenseWhereInput[]
+    NOT?: ManagerExpenseWhereInput | ManagerExpenseWhereInput[]
+    amount?: FloatFilter<"ManagerExpense"> | number
+    description?: StringFilter<"ManagerExpense"> | string
+    receipt?: StringNullableFilter<"ManagerExpense"> | string | null
+    createdAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    managerId?: StringFilter<"ManagerExpense"> | string
+    manager?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ManagerExpenseOrderByWithAggregationInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    receipt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    managerId?: SortOrder
+    _count?: ManagerExpenseCountOrderByAggregateInput
+    _avg?: ManagerExpenseAvgOrderByAggregateInput
+    _max?: ManagerExpenseMaxOrderByAggregateInput
+    _min?: ManagerExpenseMinOrderByAggregateInput
+    _sum?: ManagerExpenseSumOrderByAggregateInput
+  }
+
+  export type ManagerExpenseScalarWhereWithAggregatesInput = {
+    AND?: ManagerExpenseScalarWhereWithAggregatesInput | ManagerExpenseScalarWhereWithAggregatesInput[]
+    OR?: ManagerExpenseScalarWhereWithAggregatesInput[]
+    NOT?: ManagerExpenseScalarWhereWithAggregatesInput | ManagerExpenseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ManagerExpense"> | string
+    amount?: FloatWithAggregatesFilter<"ManagerExpense"> | number
+    description?: StringWithAggregatesFilter<"ManagerExpense"> | string
+    receipt?: StringNullableWithAggregatesFilter<"ManagerExpense"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ManagerExpense"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ManagerExpense"> | Date | string
+    managerId?: StringWithAggregatesFilter<"ManagerExpense"> | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     type: string
@@ -11467,14 +14275,22 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11483,14 +14299,22 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserUpdateInput = {
@@ -11499,14 +14323,22 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11515,14 +14347,22 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11531,8 +14371,14 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -11541,8 +14387,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -11551,8 +14403,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VerificationTokenCreateInput = {
@@ -11901,6 +14759,144 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
   }
 
+  export type OwnerFundCreateInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutOwnerFundsInput
+  }
+
+  export type OwnerFundUncheckedCreateInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type OwnerFundUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutOwnerFundsNestedInput
+  }
+
+  export type OwnerFundUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OwnerFundCreateManyInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type OwnerFundUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OwnerFundUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ManagerExpenseCreateInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    manager: UserCreateNestedOneWithoutManagerExpensesInput
+  }
+
+  export type ManagerExpenseUncheckedCreateInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    managerId: string
+  }
+
+  export type ManagerExpenseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    manager?: UserUpdateOneRequiredWithoutManagerExpensesNestedInput
+  }
+
+  export type ManagerExpenseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    managerId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ManagerExpenseCreateManyInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    managerId: string
+  }
+
+  export type ManagerExpenseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ManagerExpenseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    managerId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12124,6 +15120,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -12160,6 +15167,18 @@ export namespace Prisma {
     none?: StaffWhereInput
   }
 
+  export type OwnerFundListRelationFilter = {
+    every?: OwnerFundWhereInput
+    some?: OwnerFundWhereInput
+    none?: OwnerFundWhereInput
+  }
+
+  export type ManagerExpenseListRelationFilter = {
+    every?: ManagerExpenseWhereInput
+    some?: ManagerExpenseWhereInput
+    none?: ManagerExpenseWhereInput
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -12184,14 +15203,32 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type OwnerFundOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ManagerExpenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     isOwner?: SortOrder
+    country?: SortOrder
+    monthlyFee?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    monthlyFee?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -12200,8 +15237,14 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     isOwner?: SortOrder
+    country?: SortOrder
+    monthlyFee?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -12210,8 +15253,18 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     isOwner?: SortOrder
+    country?: SortOrder
+    monthlyFee?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    monthlyFee?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12234,6 +15287,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
@@ -12522,6 +15591,82 @@ export namespace Prisma {
     monthlyFee?: SortOrder
   }
 
+  export type OwnerFundCountOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    purpose?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OwnerFundAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type OwnerFundMaxOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    purpose?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OwnerFundMinOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    purpose?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OwnerFundSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type ManagerExpenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    managerId?: SortOrder
+  }
+
+  export type ManagerExpenseAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type ManagerExpenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    managerId?: SortOrder
+  }
+
+  export type ManagerExpenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    amount?: SortOrder
+    description?: SortOrder
+    receipt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    managerId?: SortOrder
+  }
+
+  export type ManagerExpenseSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -12612,6 +15757,20 @@ export namespace Prisma {
     connect?: StaffWhereUniqueInput | StaffWhereUniqueInput[]
   }
 
+  export type OwnerFundCreateNestedManyWithoutUserInput = {
+    create?: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput> | OwnerFundCreateWithoutUserInput[] | OwnerFundUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OwnerFundCreateOrConnectWithoutUserInput | OwnerFundCreateOrConnectWithoutUserInput[]
+    createMany?: OwnerFundCreateManyUserInputEnvelope
+    connect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+  }
+
+  export type ManagerExpenseCreateNestedManyWithoutManagerInput = {
+    create?: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput> | ManagerExpenseCreateWithoutManagerInput[] | ManagerExpenseUncheckedCreateWithoutManagerInput[]
+    connectOrCreate?: ManagerExpenseCreateOrConnectWithoutManagerInput | ManagerExpenseCreateOrConnectWithoutManagerInput[]
+    createMany?: ManagerExpenseCreateManyManagerInputEnvelope
+    connect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12654,12 +15813,34 @@ export namespace Prisma {
     connect?: StaffWhereUniqueInput | StaffWhereUniqueInput[]
   }
 
+  export type OwnerFundUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput> | OwnerFundCreateWithoutUserInput[] | OwnerFundUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OwnerFundCreateOrConnectWithoutUserInput | OwnerFundCreateOrConnectWithoutUserInput[]
+    createMany?: OwnerFundCreateManyUserInputEnvelope
+    connect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+  }
+
+  export type ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput = {
+    create?: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput> | ManagerExpenseCreateWithoutManagerInput[] | ManagerExpenseUncheckedCreateWithoutManagerInput[]
+    connectOrCreate?: ManagerExpenseCreateOrConnectWithoutManagerInput | ManagerExpenseCreateOrConnectWithoutManagerInput[]
+    createMany?: ManagerExpenseCreateManyManagerInputEnvelope
+    connect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -12746,6 +15927,34 @@ export namespace Prisma {
     deleteMany?: StaffScalarWhereInput | StaffScalarWhereInput[]
   }
 
+  export type OwnerFundUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput> | OwnerFundCreateWithoutUserInput[] | OwnerFundUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OwnerFundCreateOrConnectWithoutUserInput | OwnerFundCreateOrConnectWithoutUserInput[]
+    upsert?: OwnerFundUpsertWithWhereUniqueWithoutUserInput | OwnerFundUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OwnerFundCreateManyUserInputEnvelope
+    set?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    disconnect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    delete?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    connect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    update?: OwnerFundUpdateWithWhereUniqueWithoutUserInput | OwnerFundUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OwnerFundUpdateManyWithWhereWithoutUserInput | OwnerFundUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OwnerFundScalarWhereInput | OwnerFundScalarWhereInput[]
+  }
+
+  export type ManagerExpenseUpdateManyWithoutManagerNestedInput = {
+    create?: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput> | ManagerExpenseCreateWithoutManagerInput[] | ManagerExpenseUncheckedCreateWithoutManagerInput[]
+    connectOrCreate?: ManagerExpenseCreateOrConnectWithoutManagerInput | ManagerExpenseCreateOrConnectWithoutManagerInput[]
+    upsert?: ManagerExpenseUpsertWithWhereUniqueWithoutManagerInput | ManagerExpenseUpsertWithWhereUniqueWithoutManagerInput[]
+    createMany?: ManagerExpenseCreateManyManagerInputEnvelope
+    set?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    disconnect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    delete?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    connect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    update?: ManagerExpenseUpdateWithWhereUniqueWithoutManagerInput | ManagerExpenseUpdateWithWhereUniqueWithoutManagerInput[]
+    updateMany?: ManagerExpenseUpdateManyWithWhereWithoutManagerInput | ManagerExpenseUpdateManyWithWhereWithoutManagerInput[]
+    deleteMany?: ManagerExpenseScalarWhereInput | ManagerExpenseScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12830,6 +16039,34 @@ export namespace Prisma {
     deleteMany?: StaffScalarWhereInput | StaffScalarWhereInput[]
   }
 
+  export type OwnerFundUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput> | OwnerFundCreateWithoutUserInput[] | OwnerFundUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OwnerFundCreateOrConnectWithoutUserInput | OwnerFundCreateOrConnectWithoutUserInput[]
+    upsert?: OwnerFundUpsertWithWhereUniqueWithoutUserInput | OwnerFundUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OwnerFundCreateManyUserInputEnvelope
+    set?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    disconnect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    delete?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    connect?: OwnerFundWhereUniqueInput | OwnerFundWhereUniqueInput[]
+    update?: OwnerFundUpdateWithWhereUniqueWithoutUserInput | OwnerFundUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OwnerFundUpdateManyWithWhereWithoutUserInput | OwnerFundUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OwnerFundScalarWhereInput | OwnerFundScalarWhereInput[]
+  }
+
+  export type ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput = {
+    create?: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput> | ManagerExpenseCreateWithoutManagerInput[] | ManagerExpenseUncheckedCreateWithoutManagerInput[]
+    connectOrCreate?: ManagerExpenseCreateOrConnectWithoutManagerInput | ManagerExpenseCreateOrConnectWithoutManagerInput[]
+    upsert?: ManagerExpenseUpsertWithWhereUniqueWithoutManagerInput | ManagerExpenseUpsertWithWhereUniqueWithoutManagerInput[]
+    createMany?: ManagerExpenseCreateManyManagerInputEnvelope
+    set?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    disconnect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    delete?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    connect?: ManagerExpenseWhereUniqueInput | ManagerExpenseWhereUniqueInput[]
+    update?: ManagerExpenseUpdateWithWhereUniqueWithoutManagerInput | ManagerExpenseUpdateWithWhereUniqueWithoutManagerInput[]
+    updateMany?: ManagerExpenseUpdateManyWithWhereWithoutManagerInput | ManagerExpenseUpdateManyWithWhereWithoutManagerInput[]
+    deleteMany?: ManagerExpenseScalarWhereInput | ManagerExpenseScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutMonthSelectionsInput = {
     create?: XOR<UserCreateWithoutMonthSelectionsInput, UserUncheckedCreateWithoutMonthSelectionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutMonthSelectionsInput
@@ -12900,6 +16137,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutStaffInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStaffInput, UserUpdateWithoutStaffInput>, UserUncheckedUpdateWithoutStaffInput>
+  }
+
+  export type UserCreateNestedOneWithoutOwnerFundsInput = {
+    create?: XOR<UserCreateWithoutOwnerFundsInput, UserUncheckedCreateWithoutOwnerFundsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnerFundsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutOwnerFundsNestedInput = {
+    create?: XOR<UserCreateWithoutOwnerFundsInput, UserUncheckedCreateWithoutOwnerFundsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnerFundsInput
+    upsert?: UserUpsertWithoutOwnerFundsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOwnerFundsInput, UserUpdateWithoutOwnerFundsInput>, UserUncheckedUpdateWithoutOwnerFundsInput>
+  }
+
+  export type UserCreateNestedOneWithoutManagerExpensesInput = {
+    create?: XOR<UserCreateWithoutManagerExpensesInput, UserUncheckedCreateWithoutManagerExpensesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutManagerExpensesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutManagerExpensesNestedInput = {
+    create?: XOR<UserCreateWithoutManagerExpensesInput, UserUncheckedCreateWithoutManagerExpensesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutManagerExpensesInput
+    upsert?: UserUpsertWithoutManagerExpensesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutManagerExpensesInput, UserUpdateWithoutManagerExpensesInput>, UserUncheckedUpdateWithoutManagerExpensesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13076,6 +16341,22 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -13148,13 +16429,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -13163,13 +16452,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -13194,13 +16491,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -13209,13 +16514,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -13224,13 +16537,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -13239,13 +16560,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -13270,13 +16599,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -13285,13 +16622,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -13471,6 +16816,62 @@ export namespace Prisma {
 
   export type StaffCreateManyCreatedByInputEnvelope = {
     data: StaffCreateManyCreatedByInput | StaffCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OwnerFundCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OwnerFundUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OwnerFundCreateOrConnectWithoutUserInput = {
+    where: OwnerFundWhereUniqueInput
+    create: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput>
+  }
+
+  export type OwnerFundCreateManyUserInputEnvelope = {
+    data: OwnerFundCreateManyUserInput | OwnerFundCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ManagerExpenseCreateWithoutManagerInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ManagerExpenseUncheckedCreateWithoutManagerInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ManagerExpenseCreateOrConnectWithoutManagerInput = {
+    where: ManagerExpenseWhereUniqueInput
+    create: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput>
+  }
+
+  export type ManagerExpenseCreateManyManagerInputEnvelope = {
+    data: ManagerExpenseCreateManyManagerInput | ManagerExpenseCreateManyManagerInput[]
     skipDuplicates?: boolean
   }
 
@@ -13654,19 +17055,85 @@ export namespace Prisma {
     createdById?: StringFilter<"Staff"> | string
   }
 
+  export type OwnerFundUpsertWithWhereUniqueWithoutUserInput = {
+    where: OwnerFundWhereUniqueInput
+    update: XOR<OwnerFundUpdateWithoutUserInput, OwnerFundUncheckedUpdateWithoutUserInput>
+    create: XOR<OwnerFundCreateWithoutUserInput, OwnerFundUncheckedCreateWithoutUserInput>
+  }
+
+  export type OwnerFundUpdateWithWhereUniqueWithoutUserInput = {
+    where: OwnerFundWhereUniqueInput
+    data: XOR<OwnerFundUpdateWithoutUserInput, OwnerFundUncheckedUpdateWithoutUserInput>
+  }
+
+  export type OwnerFundUpdateManyWithWhereWithoutUserInput = {
+    where: OwnerFundScalarWhereInput
+    data: XOR<OwnerFundUpdateManyMutationInput, OwnerFundUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type OwnerFundScalarWhereInput = {
+    AND?: OwnerFundScalarWhereInput | OwnerFundScalarWhereInput[]
+    OR?: OwnerFundScalarWhereInput[]
+    NOT?: OwnerFundScalarWhereInput | OwnerFundScalarWhereInput[]
+    id?: StringFilter<"OwnerFund"> | string
+    amount?: FloatFilter<"OwnerFund"> | number
+    purpose?: StringFilter<"OwnerFund"> | string
+    receipt?: StringFilter<"OwnerFund"> | string
+    createdAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    updatedAt?: DateTimeFilter<"OwnerFund"> | Date | string
+    userId?: StringFilter<"OwnerFund"> | string
+  }
+
+  export type ManagerExpenseUpsertWithWhereUniqueWithoutManagerInput = {
+    where: ManagerExpenseWhereUniqueInput
+    update: XOR<ManagerExpenseUpdateWithoutManagerInput, ManagerExpenseUncheckedUpdateWithoutManagerInput>
+    create: XOR<ManagerExpenseCreateWithoutManagerInput, ManagerExpenseUncheckedCreateWithoutManagerInput>
+  }
+
+  export type ManagerExpenseUpdateWithWhereUniqueWithoutManagerInput = {
+    where: ManagerExpenseWhereUniqueInput
+    data: XOR<ManagerExpenseUpdateWithoutManagerInput, ManagerExpenseUncheckedUpdateWithoutManagerInput>
+  }
+
+  export type ManagerExpenseUpdateManyWithWhereWithoutManagerInput = {
+    where: ManagerExpenseScalarWhereInput
+    data: XOR<ManagerExpenseUpdateManyMutationInput, ManagerExpenseUncheckedUpdateManyWithoutManagerInput>
+  }
+
+  export type ManagerExpenseScalarWhereInput = {
+    AND?: ManagerExpenseScalarWhereInput | ManagerExpenseScalarWhereInput[]
+    OR?: ManagerExpenseScalarWhereInput[]
+    NOT?: ManagerExpenseScalarWhereInput | ManagerExpenseScalarWhereInput[]
+    id?: StringFilter<"ManagerExpense"> | string
+    amount?: FloatFilter<"ManagerExpense"> | number
+    description?: StringFilter<"ManagerExpense"> | string
+    receipt?: StringNullableFilter<"ManagerExpense"> | string | null
+    createdAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    updatedAt?: DateTimeFilter<"ManagerExpense"> | Date | string
+    managerId?: StringFilter<"ManagerExpense"> | string
+  }
+
   export type UserCreateWithoutMonthSelectionsInput = {
     id?: string
     name?: string | null
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutMonthSelectionsInput = {
@@ -13675,13 +17142,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutMonthSelectionsInput = {
@@ -13706,13 +17181,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMonthSelectionsInput = {
@@ -13721,13 +17204,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type UserCreateWithoutDailyReportsInput = {
@@ -13736,13 +17227,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutDailyReportsInput = {
@@ -13751,13 +17250,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutDailyReportsInput = {
@@ -13782,13 +17289,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDailyReportsInput = {
@@ -13797,13 +17312,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type UserCreateWithoutStockEntriesInput = {
@@ -13812,13 +17335,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutStockEntriesInput = {
@@ -13827,13 +17358,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutStockEntriesInput = {
@@ -13858,13 +17397,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStockEntriesInput = {
@@ -13873,13 +17420,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
   }
 
   export type UserCreateWithoutStaffInput = {
@@ -13888,13 +17443,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
   }
 
   export type UserUncheckedCreateWithoutStaffInput = {
@@ -13903,13 +17466,21 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    password?: string | null
     role?: string
     isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
     stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
   }
 
   export type UserCreateOrConnectWithoutStaffInput = {
@@ -13934,13 +17505,21 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStaffInput = {
@@ -13949,13 +17528,237 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
     dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
     stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
+  }
+
+  export type UserCreateWithoutOwnerFundsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    role?: string
+    isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
+    dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
+    stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
+    staff?: StaffCreateNestedManyWithoutCreatedByInput
+    managerExpenses?: ManagerExpenseCreateNestedManyWithoutManagerInput
+  }
+
+  export type UserUncheckedCreateWithoutOwnerFundsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    role?: string
+    isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+    dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    managerExpenses?: ManagerExpenseUncheckedCreateNestedManyWithoutManagerInput
+  }
+
+  export type UserCreateOrConnectWithoutOwnerFundsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOwnerFundsInput, UserUncheckedCreateWithoutOwnerFundsInput>
+  }
+
+  export type UserUpsertWithoutOwnerFundsInput = {
+    update: XOR<UserUpdateWithoutOwnerFundsInput, UserUncheckedUpdateWithoutOwnerFundsInput>
+    create: XOR<UserCreateWithoutOwnerFundsInput, UserUncheckedCreateWithoutOwnerFundsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOwnerFundsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOwnerFundsInput, UserUncheckedUpdateWithoutOwnerFundsInput>
+  }
+
+  export type UserUpdateWithoutOwnerFundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
+    dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
+    staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    managerExpenses?: ManagerExpenseUpdateManyWithoutManagerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOwnerFundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+    dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    managerExpenses?: ManagerExpenseUncheckedUpdateManyWithoutManagerNestedInput
+  }
+
+  export type UserCreateWithoutManagerExpensesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    role?: string
+    isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    monthSelections?: MonthSelectionCreateNestedManyWithoutCreatedByInput
+    dailyReports?: DailyReportCreateNestedManyWithoutCreatedByInput
+    stockEntries?: StockEntryCreateNestedManyWithoutCreatedByInput
+    staff?: StaffCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutManagerExpensesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    role?: string
+    isOwner?: boolean
+    country?: string | null
+    monthlyFee?: number | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    monthSelections?: MonthSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+    dailyReports?: DailyReportUncheckedCreateNestedManyWithoutCreatedByInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    staff?: StaffUncheckedCreateNestedManyWithoutCreatedByInput
+    ownerFunds?: OwnerFundUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutManagerExpensesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutManagerExpensesInput, UserUncheckedCreateWithoutManagerExpensesInput>
+  }
+
+  export type UserUpsertWithoutManagerExpensesInput = {
+    update: XOR<UserUpdateWithoutManagerExpensesInput, UserUncheckedUpdateWithoutManagerExpensesInput>
+    create: XOR<UserCreateWithoutManagerExpensesInput, UserUncheckedCreateWithoutManagerExpensesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutManagerExpensesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutManagerExpensesInput, UserUncheckedUpdateWithoutManagerExpensesInput>
+  }
+
+  export type UserUpdateWithoutManagerExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    monthSelections?: MonthSelectionUpdateManyWithoutCreatedByNestedInput
+    dailyReports?: DailyReportUpdateManyWithoutCreatedByNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutCreatedByNestedInput
+    staff?: StaffUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutManagerExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    monthlyFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    monthSelections?: MonthSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+    dailyReports?: DailyReportUncheckedUpdateManyWithoutCreatedByNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    staff?: StaffUncheckedUpdateManyWithoutCreatedByNestedInput
+    ownerFunds?: OwnerFundUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -14014,6 +17817,24 @@ export namespace Prisma {
     role?: string
     status?: string
     image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OwnerFundCreateManyUserInput = {
+    id?: string
+    amount: number
+    purpose: string
+    receipt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ManagerExpenseCreateManyManagerInput = {
+    id?: string
+    amount: number
+    description: string
+    receipt?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14194,6 +18015,60 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OwnerFundUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OwnerFundUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OwnerFundUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    purpose?: StringFieldUpdateOperationsInput | string
+    receipt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ManagerExpenseUpdateWithoutManagerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ManagerExpenseUncheckedUpdateWithoutManagerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ManagerExpenseUncheckedUpdateManyWithoutManagerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    receipt?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

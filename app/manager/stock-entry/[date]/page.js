@@ -152,6 +152,7 @@ export default function StockEntry({ params }) {
                     type="text"
                     placeholder="Unit (kg, pcs, etc)"
                     value={newItem.unit}
+  
                     onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
                     className="p-2 border rounded"
                   />

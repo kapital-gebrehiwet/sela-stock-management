@@ -24,7 +24,7 @@ export async function POST(req) {
     // Find the user first
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user.email
+        id: session.user.id
       }
     });
 
@@ -59,13 +59,34 @@ export async function GET(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const monthSelection = await prisma.monthSelection.findFirst({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+    const url = new URL(req.url);
+    const all = url.searchParams.get('all');
 
-    return NextResponse.json(monthSelection);
+    if (all === 'true') {
+      // Fetch all month selections
+      const monthSelections = await prisma.monthSelection.findMany({
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          createdBy: {
+            select: {
+              name: true,
+              email: true
+            }
+          }
+        }
+      });
+      return NextResponse.json(monthSelections);
+    } else {
+      // Fetch only the latest month selection
+      const monthSelection = await prisma.monthSelection.findFirst({
+        orderBy: {
+          createdAt: 'desc',
+        }
+      });
+      return NextResponse.json(monthSelection);
+    }
   } catch (error) {
     console.error('Error fetching month selection:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

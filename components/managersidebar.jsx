@@ -40,6 +40,11 @@ const Managersidebar = () => {
             name: 'Staff List',
             icon: 'Users',
             href: '/manager/staff'
+        },
+        {
+            name: 'Expenses',
+            icon: 'Money',
+            href: '/manager/expenses'
         }
     ]
     
