@@ -149,3 +149,17 @@ model ManagerExpense {
 
   @@index([managerId])
 }
+
+model SalesReport {
+  id            String   @id @default(cuid())
+  itemName      String
+  amount        Int
+  unitPrice     Float
+  totalPrice    Float
+  cashAmount    Float    @default(0)    // Amount paid in cash
+  transferAmount Float   @default(0)    // Amount paid via transfer
+  image         String?
+  managerId     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

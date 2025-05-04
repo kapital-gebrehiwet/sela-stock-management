@@ -44,14 +44,22 @@ model User {
   email           String?          @unique
   emailVerified   DateTime?
   image           String?
+  password        String?
   role            String           @default("manager") // "owner" or "manager"
   isOwner         Boolean          @default(false)
+  country         String?
+  monthlyFee      Float?
+  status          String           @default("active")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   accounts        Account[]
   sessions        Session[]
   monthSelections MonthSelection[]
   dailyReports    DailyReport[]
   stockEntries    StockEntry[]
   staff           Staff[]
+  ownerFunds      OwnerFund[]
+  managerExpenses ManagerExpense[]
 }
 
 model VerificationToken {
@@ -114,4 +122,43 @@ model Staff {
   createdById String
 
   @@index([createdById])
+}
+
+model OwnerFund {
+  id        String   @id @default(cuid())
+  amount    Float
+  purpose   String
+  receipt   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model ManagerExpense {
+  id          String   @id @default(cuid())
+  amount      Float
+  description String
+  receipt     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  managerId   String
+  manager     User     @relation(fields: [managerId], references: [id])
+
+  @@index([managerId])
+}
+
+model SalesReport {
+  id            String   @id @default(cuid())
+  itemName      String
+  amount        Int
+  unitPrice     Float
+  totalPrice    Float
+  paymentMethod String   @default("cash") // "cash" or "transfer"
+  image         String?
+  managerId     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

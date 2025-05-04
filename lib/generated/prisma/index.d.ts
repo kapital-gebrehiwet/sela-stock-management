@@ -63,6 +63,11 @@ export type OwnerFund = $Result.DefaultSelection<Prisma.$OwnerFundPayload>
  * 
  */
 export type ManagerExpense = $Result.DefaultSelection<Prisma.$ManagerExpensePayload>
+/**
+ * Model SalesReport
+ * 
+ */
+export type SalesReport = $Result.DefaultSelection<Prisma.$SalesReportPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -288,6 +293,16 @@ export class PrismaClient<
     * ```
     */
   get managerExpense(): Prisma.ManagerExpenseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.salesReport`: Exposes CRUD operations for the **SalesReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SalesReports
+    * const salesReports = await prisma.salesReport.findMany()
+    * ```
+    */
+  get salesReport(): Prisma.SalesReportDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -737,7 +752,8 @@ export namespace Prisma {
     StockEntry: 'StockEntry',
     Staff: 'Staff',
     OwnerFund: 'OwnerFund',
-    ManagerExpense: 'ManagerExpense'
+    ManagerExpense: 'ManagerExpense',
+    SalesReport: 'SalesReport'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -756,7 +772,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "user" | "verificationToken" | "monthSelection" | "dailyReport" | "stockEntry" | "staff" | "ownerFund" | "managerExpense"
+      modelProps: "account" | "session" | "user" | "verificationToken" | "monthSelection" | "dailyReport" | "stockEntry" | "staff" | "ownerFund" | "managerExpense" | "salesReport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1500,6 +1516,80 @@ export namespace Prisma {
           }
         }
       }
+      SalesReport: {
+        payload: Prisma.$SalesReportPayload<ExtArgs>
+        fields: Prisma.SalesReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SalesReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SalesReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          findFirst: {
+            args: Prisma.SalesReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SalesReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          findMany: {
+            args: Prisma.SalesReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>[]
+          }
+          create: {
+            args: Prisma.SalesReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          createMany: {
+            args: Prisma.SalesReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SalesReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>[]
+          }
+          delete: {
+            args: Prisma.SalesReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          update: {
+            args: Prisma.SalesReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.SalesReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SalesReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SalesReportUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>[]
+          }
+          upsert: {
+            args: Prisma.SalesReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SalesReportPayload>
+          }
+          aggregate: {
+            args: Prisma.SalesReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSalesReport>
+          }
+          groupBy: {
+            args: Prisma.SalesReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SalesReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SalesReportCountArgs<ExtArgs>
+            result: $Utils.Optional<SalesReportCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1594,6 +1684,7 @@ export namespace Prisma {
     staff?: StaffOmit
     ownerFund?: OwnerFundOmit
     managerExpense?: ManagerExpenseOmit
+    salesReport?: SalesReportOmit
   }
 
   /* Types for Logging */
@@ -13117,6 +13208,1129 @@ export namespace Prisma {
 
 
   /**
+   * Model SalesReport
+   */
+
+  export type AggregateSalesReport = {
+    _count: SalesReportCountAggregateOutputType | null
+    _avg: SalesReportAvgAggregateOutputType | null
+    _sum: SalesReportSumAggregateOutputType | null
+    _min: SalesReportMinAggregateOutputType | null
+    _max: SalesReportMaxAggregateOutputType | null
+  }
+
+  export type SalesReportAvgAggregateOutputType = {
+    amount: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    cashAmount: number | null
+    transferAmount: number | null
+  }
+
+  export type SalesReportSumAggregateOutputType = {
+    amount: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    cashAmount: number | null
+    transferAmount: number | null
+  }
+
+  export type SalesReportMinAggregateOutputType = {
+    id: string | null
+    itemName: string | null
+    amount: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    cashAmount: number | null
+    transferAmount: number | null
+    image: string | null
+    managerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SalesReportMaxAggregateOutputType = {
+    id: string | null
+    itemName: string | null
+    amount: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    cashAmount: number | null
+    transferAmount: number | null
+    image: string | null
+    managerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SalesReportCountAggregateOutputType = {
+    id: number
+    itemName: number
+    amount: number
+    unitPrice: number
+    totalPrice: number
+    cashAmount: number
+    transferAmount: number
+    image: number
+    managerId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SalesReportAvgAggregateInputType = {
+    amount?: true
+    unitPrice?: true
+    totalPrice?: true
+    cashAmount?: true
+    transferAmount?: true
+  }
+
+  export type SalesReportSumAggregateInputType = {
+    amount?: true
+    unitPrice?: true
+    totalPrice?: true
+    cashAmount?: true
+    transferAmount?: true
+  }
+
+  export type SalesReportMinAggregateInputType = {
+    id?: true
+    itemName?: true
+    amount?: true
+    unitPrice?: true
+    totalPrice?: true
+    cashAmount?: true
+    transferAmount?: true
+    image?: true
+    managerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SalesReportMaxAggregateInputType = {
+    id?: true
+    itemName?: true
+    amount?: true
+    unitPrice?: true
+    totalPrice?: true
+    cashAmount?: true
+    transferAmount?: true
+    image?: true
+    managerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SalesReportCountAggregateInputType = {
+    id?: true
+    itemName?: true
+    amount?: true
+    unitPrice?: true
+    totalPrice?: true
+    cashAmount?: true
+    transferAmount?: true
+    image?: true
+    managerId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SalesReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SalesReport to aggregate.
+     */
+    where?: SalesReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SalesReports to fetch.
+     */
+    orderBy?: SalesReportOrderByWithRelationInput | SalesReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SalesReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SalesReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SalesReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SalesReports
+    **/
+    _count?: true | SalesReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SalesReportAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SalesReportSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SalesReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SalesReportMaxAggregateInputType
+  }
+
+  export type GetSalesReportAggregateType<T extends SalesReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateSalesReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSalesReport[P]>
+      : GetScalarType<T[P], AggregateSalesReport[P]>
+  }
+
+
+
+
+  export type SalesReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalesReportWhereInput
+    orderBy?: SalesReportOrderByWithAggregationInput | SalesReportOrderByWithAggregationInput[]
+    by: SalesReportScalarFieldEnum[] | SalesReportScalarFieldEnum
+    having?: SalesReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SalesReportCountAggregateInputType | true
+    _avg?: SalesReportAvgAggregateInputType
+    _sum?: SalesReportSumAggregateInputType
+    _min?: SalesReportMinAggregateInputType
+    _max?: SalesReportMaxAggregateInputType
+  }
+
+  export type SalesReportGroupByOutputType = {
+    id: string
+    itemName: string
+    amount: number
+    unitPrice: number
+    totalPrice: number
+    cashAmount: number
+    transferAmount: number
+    image: string | null
+    managerId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: SalesReportCountAggregateOutputType | null
+    _avg: SalesReportAvgAggregateOutputType | null
+    _sum: SalesReportSumAggregateOutputType | null
+    _min: SalesReportMinAggregateOutputType | null
+    _max: SalesReportMaxAggregateOutputType | null
+  }
+
+  type GetSalesReportGroupByPayload<T extends SalesReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SalesReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SalesReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SalesReportGroupByOutputType[P]>
+            : GetScalarType<T[P], SalesReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SalesReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    itemName?: boolean
+    amount?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    cashAmount?: boolean
+    transferAmount?: boolean
+    image?: boolean
+    managerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["salesReport"]>
+
+  export type SalesReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    itemName?: boolean
+    amount?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    cashAmount?: boolean
+    transferAmount?: boolean
+    image?: boolean
+    managerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["salesReport"]>
+
+  export type SalesReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    itemName?: boolean
+    amount?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    cashAmount?: boolean
+    transferAmount?: boolean
+    image?: boolean
+    managerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["salesReport"]>
+
+  export type SalesReportSelectScalar = {
+    id?: boolean
+    itemName?: boolean
+    amount?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    cashAmount?: boolean
+    transferAmount?: boolean
+    image?: boolean
+    managerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SalesReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "itemName" | "amount" | "unitPrice" | "totalPrice" | "cashAmount" | "transferAmount" | "image" | "managerId" | "createdAt" | "updatedAt", ExtArgs["result"]["salesReport"]>
+
+  export type $SalesReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SalesReport"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      itemName: string
+      amount: number
+      unitPrice: number
+      totalPrice: number
+      cashAmount: number
+      transferAmount: number
+      image: string | null
+      managerId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["salesReport"]>
+    composites: {}
+  }
+
+  type SalesReportGetPayload<S extends boolean | null | undefined | SalesReportDefaultArgs> = $Result.GetResult<Prisma.$SalesReportPayload, S>
+
+  type SalesReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SalesReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SalesReportCountAggregateInputType | true
+    }
+
+  export interface SalesReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SalesReport'], meta: { name: 'SalesReport' } }
+    /**
+     * Find zero or one SalesReport that matches the filter.
+     * @param {SalesReportFindUniqueArgs} args - Arguments to find a SalesReport
+     * @example
+     * // Get one SalesReport
+     * const salesReport = await prisma.salesReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SalesReportFindUniqueArgs>(args: SelectSubset<T, SalesReportFindUniqueArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SalesReport that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SalesReportFindUniqueOrThrowArgs} args - Arguments to find a SalesReport
+     * @example
+     * // Get one SalesReport
+     * const salesReport = await prisma.salesReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SalesReportFindUniqueOrThrowArgs>(args: SelectSubset<T, SalesReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SalesReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportFindFirstArgs} args - Arguments to find a SalesReport
+     * @example
+     * // Get one SalesReport
+     * const salesReport = await prisma.salesReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SalesReportFindFirstArgs>(args?: SelectSubset<T, SalesReportFindFirstArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SalesReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportFindFirstOrThrowArgs} args - Arguments to find a SalesReport
+     * @example
+     * // Get one SalesReport
+     * const salesReport = await prisma.salesReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SalesReportFindFirstOrThrowArgs>(args?: SelectSubset<T, SalesReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SalesReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SalesReports
+     * const salesReports = await prisma.salesReport.findMany()
+     * 
+     * // Get first 10 SalesReports
+     * const salesReports = await prisma.salesReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const salesReportWithIdOnly = await prisma.salesReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SalesReportFindManyArgs>(args?: SelectSubset<T, SalesReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SalesReport.
+     * @param {SalesReportCreateArgs} args - Arguments to create a SalesReport.
+     * @example
+     * // Create one SalesReport
+     * const SalesReport = await prisma.salesReport.create({
+     *   data: {
+     *     // ... data to create a SalesReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends SalesReportCreateArgs>(args: SelectSubset<T, SalesReportCreateArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SalesReports.
+     * @param {SalesReportCreateManyArgs} args - Arguments to create many SalesReports.
+     * @example
+     * // Create many SalesReports
+     * const salesReport = await prisma.salesReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SalesReportCreateManyArgs>(args?: SelectSubset<T, SalesReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SalesReports and returns the data saved in the database.
+     * @param {SalesReportCreateManyAndReturnArgs} args - Arguments to create many SalesReports.
+     * @example
+     * // Create many SalesReports
+     * const salesReport = await prisma.salesReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SalesReports and only return the `id`
+     * const salesReportWithIdOnly = await prisma.salesReport.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SalesReportCreateManyAndReturnArgs>(args?: SelectSubset<T, SalesReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SalesReport.
+     * @param {SalesReportDeleteArgs} args - Arguments to delete one SalesReport.
+     * @example
+     * // Delete one SalesReport
+     * const SalesReport = await prisma.salesReport.delete({
+     *   where: {
+     *     // ... filter to delete one SalesReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SalesReportDeleteArgs>(args: SelectSubset<T, SalesReportDeleteArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SalesReport.
+     * @param {SalesReportUpdateArgs} args - Arguments to update one SalesReport.
+     * @example
+     * // Update one SalesReport
+     * const salesReport = await prisma.salesReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SalesReportUpdateArgs>(args: SelectSubset<T, SalesReportUpdateArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SalesReports.
+     * @param {SalesReportDeleteManyArgs} args - Arguments to filter SalesReports to delete.
+     * @example
+     * // Delete a few SalesReports
+     * const { count } = await prisma.salesReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SalesReportDeleteManyArgs>(args?: SelectSubset<T, SalesReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SalesReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SalesReports
+     * const salesReport = await prisma.salesReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SalesReportUpdateManyArgs>(args: SelectSubset<T, SalesReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SalesReports and returns the data updated in the database.
+     * @param {SalesReportUpdateManyAndReturnArgs} args - Arguments to update many SalesReports.
+     * @example
+     * // Update many SalesReports
+     * const salesReport = await prisma.salesReport.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SalesReports and only return the `id`
+     * const salesReportWithIdOnly = await prisma.salesReport.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SalesReportUpdateManyAndReturnArgs>(args: SelectSubset<T, SalesReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SalesReport.
+     * @param {SalesReportUpsertArgs} args - Arguments to update or create a SalesReport.
+     * @example
+     * // Update or create a SalesReport
+     * const salesReport = await prisma.salesReport.upsert({
+     *   create: {
+     *     // ... data to create a SalesReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SalesReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SalesReportUpsertArgs>(args: SelectSubset<T, SalesReportUpsertArgs<ExtArgs>>): Prisma__SalesReportClient<$Result.GetResult<Prisma.$SalesReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SalesReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportCountArgs} args - Arguments to filter SalesReports to count.
+     * @example
+     * // Count the number of SalesReports
+     * const count = await prisma.salesReport.count({
+     *   where: {
+     *     // ... the filter for the SalesReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends SalesReportCountArgs>(
+      args?: Subset<T, SalesReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SalesReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SalesReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SalesReportAggregateArgs>(args: Subset<T, SalesReportAggregateArgs>): Prisma.PrismaPromise<GetSalesReportAggregateType<T>>
+
+    /**
+     * Group by SalesReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SalesReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SalesReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SalesReportGroupByArgs['orderBy'] }
+        : { orderBy?: SalesReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SalesReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSalesReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SalesReport model
+   */
+  readonly fields: SalesReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SalesReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SalesReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SalesReport model
+   */
+  interface SalesReportFieldRefs {
+    readonly id: FieldRef<"SalesReport", 'String'>
+    readonly itemName: FieldRef<"SalesReport", 'String'>
+    readonly amount: FieldRef<"SalesReport", 'Int'>
+    readonly unitPrice: FieldRef<"SalesReport", 'Float'>
+    readonly totalPrice: FieldRef<"SalesReport", 'Float'>
+    readonly cashAmount: FieldRef<"SalesReport", 'Float'>
+    readonly transferAmount: FieldRef<"SalesReport", 'Float'>
+    readonly image: FieldRef<"SalesReport", 'String'>
+    readonly managerId: FieldRef<"SalesReport", 'String'>
+    readonly createdAt: FieldRef<"SalesReport", 'DateTime'>
+    readonly updatedAt: FieldRef<"SalesReport", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SalesReport findUnique
+   */
+  export type SalesReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter, which SalesReport to fetch.
+     */
+    where: SalesReportWhereUniqueInput
+  }
+
+  /**
+   * SalesReport findUniqueOrThrow
+   */
+  export type SalesReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter, which SalesReport to fetch.
+     */
+    where: SalesReportWhereUniqueInput
+  }
+
+  /**
+   * SalesReport findFirst
+   */
+  export type SalesReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter, which SalesReport to fetch.
+     */
+    where?: SalesReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SalesReports to fetch.
+     */
+    orderBy?: SalesReportOrderByWithRelationInput | SalesReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SalesReports.
+     */
+    cursor?: SalesReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SalesReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SalesReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SalesReports.
+     */
+    distinct?: SalesReportScalarFieldEnum | SalesReportScalarFieldEnum[]
+  }
+
+  /**
+   * SalesReport findFirstOrThrow
+   */
+  export type SalesReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter, which SalesReport to fetch.
+     */
+    where?: SalesReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SalesReports to fetch.
+     */
+    orderBy?: SalesReportOrderByWithRelationInput | SalesReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SalesReports.
+     */
+    cursor?: SalesReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SalesReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SalesReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SalesReports.
+     */
+    distinct?: SalesReportScalarFieldEnum | SalesReportScalarFieldEnum[]
+  }
+
+  /**
+   * SalesReport findMany
+   */
+  export type SalesReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter, which SalesReports to fetch.
+     */
+    where?: SalesReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SalesReports to fetch.
+     */
+    orderBy?: SalesReportOrderByWithRelationInput | SalesReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SalesReports.
+     */
+    cursor?: SalesReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SalesReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SalesReports.
+     */
+    skip?: number
+    distinct?: SalesReportScalarFieldEnum | SalesReportScalarFieldEnum[]
+  }
+
+  /**
+   * SalesReport create
+   */
+  export type SalesReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SalesReport.
+     */
+    data: XOR<SalesReportCreateInput, SalesReportUncheckedCreateInput>
+  }
+
+  /**
+   * SalesReport createMany
+   */
+  export type SalesReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SalesReports.
+     */
+    data: SalesReportCreateManyInput | SalesReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SalesReport createManyAndReturn
+   */
+  export type SalesReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * The data used to create many SalesReports.
+     */
+    data: SalesReportCreateManyInput | SalesReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SalesReport update
+   */
+  export type SalesReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SalesReport.
+     */
+    data: XOR<SalesReportUpdateInput, SalesReportUncheckedUpdateInput>
+    /**
+     * Choose, which SalesReport to update.
+     */
+    where: SalesReportWhereUniqueInput
+  }
+
+  /**
+   * SalesReport updateMany
+   */
+  export type SalesReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SalesReports.
+     */
+    data: XOR<SalesReportUpdateManyMutationInput, SalesReportUncheckedUpdateManyInput>
+    /**
+     * Filter which SalesReports to update
+     */
+    where?: SalesReportWhereInput
+    /**
+     * Limit how many SalesReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SalesReport updateManyAndReturn
+   */
+  export type SalesReportUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * The data used to update SalesReports.
+     */
+    data: XOR<SalesReportUpdateManyMutationInput, SalesReportUncheckedUpdateManyInput>
+    /**
+     * Filter which SalesReports to update
+     */
+    where?: SalesReportWhereInput
+    /**
+     * Limit how many SalesReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SalesReport upsert
+   */
+  export type SalesReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SalesReport to update in case it exists.
+     */
+    where: SalesReportWhereUniqueInput
+    /**
+     * In case the SalesReport found by the `where` argument doesn't exist, create a new SalesReport with this data.
+     */
+    create: XOR<SalesReportCreateInput, SalesReportUncheckedCreateInput>
+    /**
+     * In case the SalesReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SalesReportUpdateInput, SalesReportUncheckedUpdateInput>
+  }
+
+  /**
+   * SalesReport delete
+   */
+  export type SalesReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+    /**
+     * Filter which SalesReport to delete.
+     */
+    where: SalesReportWhereUniqueInput
+  }
+
+  /**
+   * SalesReport deleteMany
+   */
+  export type SalesReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SalesReports to delete
+     */
+    where?: SalesReportWhereInput
+    /**
+     * Limit how many SalesReports to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SalesReport without action
+   */
+  export type SalesReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SalesReport
+     */
+    select?: SalesReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SalesReport
+     */
+    omit?: SalesReportOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13266,6 +14480,23 @@ export namespace Prisma {
   };
 
   export type ManagerExpenseScalarFieldEnum = (typeof ManagerExpenseScalarFieldEnum)[keyof typeof ManagerExpenseScalarFieldEnum]
+
+
+  export const SalesReportScalarFieldEnum: {
+    id: 'id',
+    itemName: 'itemName',
+    amount: 'amount',
+    unitPrice: 'unitPrice',
+    totalPrice: 'totalPrice',
+    cashAmount: 'cashAmount',
+    transferAmount: 'transferAmount',
+    image: 'image',
+    managerId: 'managerId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SalesReportScalarFieldEnum = (typeof SalesReportScalarFieldEnum)[keyof typeof SalesReportScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14117,6 +15348,90 @@ export namespace Prisma {
     managerId?: StringWithAggregatesFilter<"ManagerExpense"> | string
   }
 
+  export type SalesReportWhereInput = {
+    AND?: SalesReportWhereInput | SalesReportWhereInput[]
+    OR?: SalesReportWhereInput[]
+    NOT?: SalesReportWhereInput | SalesReportWhereInput[]
+    id?: StringFilter<"SalesReport"> | string
+    itemName?: StringFilter<"SalesReport"> | string
+    amount?: IntFilter<"SalesReport"> | number
+    unitPrice?: FloatFilter<"SalesReport"> | number
+    totalPrice?: FloatFilter<"SalesReport"> | number
+    cashAmount?: FloatFilter<"SalesReport"> | number
+    transferAmount?: FloatFilter<"SalesReport"> | number
+    image?: StringNullableFilter<"SalesReport"> | string | null
+    managerId?: StringFilter<"SalesReport"> | string
+    createdAt?: DateTimeFilter<"SalesReport"> | Date | string
+    updatedAt?: DateTimeFilter<"SalesReport"> | Date | string
+  }
+
+  export type SalesReportOrderByWithRelationInput = {
+    id?: SortOrder
+    itemName?: SortOrder
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+    image?: SortOrderInput | SortOrder
+    managerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SalesReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SalesReportWhereInput | SalesReportWhereInput[]
+    OR?: SalesReportWhereInput[]
+    NOT?: SalesReportWhereInput | SalesReportWhereInput[]
+    itemName?: StringFilter<"SalesReport"> | string
+    amount?: IntFilter<"SalesReport"> | number
+    unitPrice?: FloatFilter<"SalesReport"> | number
+    totalPrice?: FloatFilter<"SalesReport"> | number
+    cashAmount?: FloatFilter<"SalesReport"> | number
+    transferAmount?: FloatFilter<"SalesReport"> | number
+    image?: StringNullableFilter<"SalesReport"> | string | null
+    managerId?: StringFilter<"SalesReport"> | string
+    createdAt?: DateTimeFilter<"SalesReport"> | Date | string
+    updatedAt?: DateTimeFilter<"SalesReport"> | Date | string
+  }, "id">
+
+  export type SalesReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    itemName?: SortOrder
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+    image?: SortOrderInput | SortOrder
+    managerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SalesReportCountOrderByAggregateInput
+    _avg?: SalesReportAvgOrderByAggregateInput
+    _max?: SalesReportMaxOrderByAggregateInput
+    _min?: SalesReportMinOrderByAggregateInput
+    _sum?: SalesReportSumOrderByAggregateInput
+  }
+
+  export type SalesReportScalarWhereWithAggregatesInput = {
+    AND?: SalesReportScalarWhereWithAggregatesInput | SalesReportScalarWhereWithAggregatesInput[]
+    OR?: SalesReportScalarWhereWithAggregatesInput[]
+    NOT?: SalesReportScalarWhereWithAggregatesInput | SalesReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SalesReport"> | string
+    itemName?: StringWithAggregatesFilter<"SalesReport"> | string
+    amount?: IntWithAggregatesFilter<"SalesReport"> | number
+    unitPrice?: FloatWithAggregatesFilter<"SalesReport"> | number
+    totalPrice?: FloatWithAggregatesFilter<"SalesReport"> | number
+    cashAmount?: FloatWithAggregatesFilter<"SalesReport"> | number
+    transferAmount?: FloatWithAggregatesFilter<"SalesReport"> | number
+    image?: StringNullableWithAggregatesFilter<"SalesReport"> | string | null
+    managerId?: StringWithAggregatesFilter<"SalesReport"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SalesReport"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SalesReport"> | Date | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     type: string
@@ -14897,6 +16212,104 @@ export namespace Prisma {
     managerId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type SalesReportCreateInput = {
+    id?: string
+    itemName: string
+    amount: number
+    unitPrice: number
+    totalPrice: number
+    cashAmount?: number
+    transferAmount?: number
+    image?: string | null
+    managerId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SalesReportUncheckedCreateInput = {
+    id?: string
+    itemName: string
+    amount: number
+    unitPrice: number
+    totalPrice: number
+    cashAmount?: number
+    transferAmount?: number
+    image?: string | null
+    managerId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SalesReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemName?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    cashAmount?: FloatFieldUpdateOperationsInput | number
+    transferAmount?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SalesReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemName?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    cashAmount?: FloatFieldUpdateOperationsInput | number
+    transferAmount?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SalesReportCreateManyInput = {
+    id?: string
+    itemName: string
+    amount: number
+    unitPrice: number
+    totalPrice: number
+    cashAmount?: number
+    transferAmount?: number
+    image?: string | null
+    managerId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SalesReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemName?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    cashAmount?: FloatFieldUpdateOperationsInput | number
+    transferAmount?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SalesReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    itemName?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    cashAmount?: FloatFieldUpdateOperationsInput | number
+    transferAmount?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15665,6 +17078,64 @@ export namespace Prisma {
 
   export type ManagerExpenseSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type SalesReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    itemName?: SortOrder
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+    image?: SortOrder
+    managerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SalesReportAvgOrderByAggregateInput = {
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+  }
+
+  export type SalesReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    itemName?: SortOrder
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+    image?: SortOrder
+    managerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SalesReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    itemName?: SortOrder
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
+    image?: SortOrder
+    managerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SalesReportSumOrderByAggregateInput = {
+    amount?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    cashAmount?: SortOrder
+    transferAmount?: SortOrder
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {

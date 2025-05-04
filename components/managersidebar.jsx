@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import {ChartBar, Home} from "lucide-react"
 
 const Managersidebar = () => {
     const pathname = usePathname();
@@ -13,37 +14,37 @@ const Managersidebar = () => {
     const lists = [
         {
             name: 'Dashboard',
-            icon: 'Home',
+            icon: Home,
             href: '/manager'
         },
         {
             name: 'Add Stock',
-            icon: 'Box',
+            icon: Home,
             href: '/manager/stock-entry'
         },
         {
             name: 'Stock Level',
-            icon: 'ChartBar',
+            icon: ChartBar,
             href: '/manager/stock-level'
         },
         {
             name: 'Sales Report',
-            icon: 'ChartBar',
+            icon: ChartBar,
             href: '/manager/sales-report'
         },
         {
             name: 'Credit Report',
-            icon: 'CreditCard',
+            icon: Home,
             href: '/manager/credit-report'
         },
         {
             name: 'Staff List',
-            icon: 'Users',
+            icon:Home,
             href: '/manager/staff'
         },
         {
             name: 'Expenses',
-            icon: 'Money',
+            icon: Home,
             href: '/manager/expenses'
         }
     ]
@@ -55,6 +56,7 @@ const Managersidebar = () => {
                 <ul className='space-y-2'>
                     {lists.map((item) => (
                         <li key={item.name}>
+
                             <Link 
                                 href={item.href}
                                 className={`flex items-center p-3 rounded-md transition-colors ${
@@ -62,8 +64,9 @@ const Managersidebar = () => {
                                         ? 'bg-slate-700 text-white'
                                         : 'text-gray-300 hover:bg-slate-700'
                                 }`}
-                            >
-                                <span className='ml-2'>{item.name}</span>
+                            >   
+                                <item.icon className="mr-2 h-4 w-4"/>
+                                <span className='ml-2'> {item.name}</span>
                             </Link>
                         </li>
                     ))}

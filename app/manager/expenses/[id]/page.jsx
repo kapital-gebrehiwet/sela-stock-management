@@ -11,6 +11,7 @@ export default function ManagerExpensesPage() {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalExpenses, setTotalExpenses] = useState(0);
   const [formData, setFormData] = useState({
     amount: '',
     description: '',
@@ -32,6 +33,8 @@ export default function ManagerExpensesPage() {
       if (response.ok) {
         const data = await response.json();
         setExpenses(data);
+        const total = data.reduce((sum, expense) => sum + expense.amount, 0);
+        setTotalExpenses(total);
       } else {
         throw new Error('Failed to fetch expenses');
       }
@@ -61,6 +64,7 @@ export default function ManagerExpensesPage() {
       if (response.ok) {
         const newExpense = await response.json();
         setExpenses([newExpense, ...expenses]);
+        setTotalExpenses(prevTotal => prevTotal + parseFloat(formData.amount));
         setFormData({ amount: '', description: '', receipt: null });
         setError(null);
       } else {
@@ -93,6 +97,14 @@ export default function ManagerExpensesPage() {
       <div className="ml-64 p-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Daily Expenses</h1>
+          <div className="bg-white rounded-lg shadow p-6 mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Total Expenses</h2>
+              <span className="text-2xl font-bold text-indigo-600">
+                {totalExpenses.toFixed(2)} birr
+              </span>
+            </div>
+          </div>
           {/* Add Expense Form */}
           <div className="bg-white rounded-lg shadow p-6 mb-8">
             <h2 className="text-xl font-semibold mb-4">Add New Expense</h2>
