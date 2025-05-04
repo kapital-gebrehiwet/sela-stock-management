@@ -53,6 +53,11 @@ const OwnerSidebar = () => {
       name: 'Owner Fund',
       icon: 'Money',
       href: '/owner/fund'
+    },
+    {
+      name: 'Set menu',
+      icon: 'Money',
+      href: '/owner/menu'
     }
   ];
 
