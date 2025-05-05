@@ -83,8 +83,11 @@ export async function POST(request) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
         
-        // Create a unique filename
-        const filename = `${Date.now()}-${image.name}`;
+        // Get the original extension
+        const originalName = image.name;
+        const ext = originalName.substring(originalName.lastIndexOf('.'));
+        // Create a unique filename with the correct extension
+        const filename = `${Date.now()}-${originalName}`;
         const uploadDir = path.join(process.cwd(), 'public', 'uploads');
         
         // Ensure the uploads directory exists

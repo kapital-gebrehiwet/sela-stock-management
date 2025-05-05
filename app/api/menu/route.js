@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../app/api/auth/[...nextauth]/auth';
 import prisma from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
 
 // GET: List all menu items
 export async function GET() {
@@ -35,7 +33,6 @@ export async function POST(request) {
     const name = formData.get('name');
     const category = formData.get('category');
     const price = formData.get('price');
-    const image = formData.get('image');
 
     if (!name || !category || !price) {
       return NextResponse.json(
@@ -44,24 +41,11 @@ export async function POST(request) {
       );
     }
 
-    let imagePath = null;
-    if (image && image.name) {
-      const bytes = await image.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-      await mkdir(uploadDir, { recursive: true });
-      const filename = `${Date.now()}-${image.name}`;
-      const filePath = path.join(uploadDir, filename);
-      await writeFile(filePath, buffer);
-      imagePath = `/uploads/${filename}`;
-    }
-
     const menuItem = await prisma.menuItem.create({
       data: {
         name,
         category,
         price: parseFloat(price),
-        image: imagePath,
       },
     });
 
@@ -91,7 +75,6 @@ export async function PUT(request) {
     const name = formData.get('name');
     const category = formData.get('category');
     const price = formData.get('price');
-    const image = formData.get('image');
 
     if (!id || !name || !category || !price) {
       return NextResponse.json(
@@ -100,25 +83,12 @@ export async function PUT(request) {
       );
     }
 
-    let imagePath = undefined;
-    if (image && image.name) {
-      const bytes = await image.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-      await mkdir(uploadDir, { recursive: true });
-      const filename = `${Date.now()}-${image.name}`;
-      const filePath = path.join(uploadDir, filename);
-      await writeFile(filePath, buffer);
-      imagePath = `/uploads/${filename}`;
-    }
-
     const menuItem = await prisma.menuItem.update({
       where: { id },
       data: {
         name,
         category,
         price: parseFloat(price),
-        ...(imagePath ? { image: imagePath } : {}),
       },
     });
 

@@ -15,8 +15,6 @@ export default function MenuManagement() {
     name: '',
     category: 'food',
     price: '',
-    image: null,
-    imagePreview: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -48,8 +46,8 @@ export default function MenuManagement() {
 
   const handleAddLocal = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.category || !formData.price || !formData.image) {
-      setError('All fields including image are required.');
+    if (!formData.name || !formData.category || !formData.price) {
+      setError('All fields are required.');
       return;
     }
     setLocalItems([
@@ -57,11 +55,9 @@ export default function MenuManagement() {
       {
         ...formData,
         id: Date.now().toString(),
-        imagePreview: formData.imagePreview,
       },
     ]);
-    setFormData({ name: '', category: 'food', price: '', image: null, imagePreview: '' });
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    setFormData({ name: '', category: 'food', price: '' });
     setError('');
   };
 
@@ -69,26 +65,81 @@ export default function MenuManagement() {
     setLocalItems(localItems.filter((item) => item.id !== id));
   };
 
+  const handleEditItem = (item) => {
+    setEditingItem(item);
+    setFormData({
+      name: item.name,
+      category: item.category,
+      price: item.price.toString(),
+    });
+  };
+
+  const handleUpdateItem = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.category || !formData.price) {
+      setError('All fields are required.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`/api/menu/${editingItem.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          category: formData.category,
+          price: parseFloat(formData.price),
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to update menu item');
+      
+      await fetchMenuItems();
+      setEditingItem(null);
+      setFormData({ name: '', category: 'food', price: '' });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteItem = async (id) => {
+    if (!confirm('Are you sure you want to delete this item?')) return;
+
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`/api/menu/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete menu item');
+      
+      await fetchMenuItems();
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingItem(null);
+    setFormData({ name: '', category: 'food', price: '' });
+  };
+
   const handleFinishMenu = async () => {
     setLoading(true);
     setError('');
     try {
-      // Prepare items for batch API: convert File to base64
-      const itemsToSend = await Promise.all(
-        localItems.map(async (item) => {
-          let imageDataUrl = '';
-          if (item.image) {
-            imageDataUrl = item.imagePreview;
-          }
-          return {
-            name: item.name,
-            category: item.category,
-            price: item.price,
-            image: item.image ? { name: item.image.name } : null,
-            imageDataUrl,
-          };
-        })
-      );
+      const itemsToSend = localItems.map((item) => ({
+        name: item.name,
+        category: item.category,
+        price: item.price,
+      }));
       const response = await fetch('/api/menu/batch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -105,7 +156,6 @@ export default function MenuManagement() {
   };
 
   const handleExportPDF = async () => {
-    // Dynamically import both libraries
     const jsPDFModule = await import('jspdf');
     const autoTable = (await import('jspdf-autotable')).default;
     const doc = new jsPDFModule.default();
@@ -157,7 +207,7 @@ export default function MenuManagement() {
         </div>
       )}
 
-      <form onSubmit={handleAddLocal} className="mb-8">
+      <form onSubmit={editingItem ? handleUpdateItem : handleAddLocal} className="mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1">Name</label>
@@ -192,19 +242,6 @@ export default function MenuManagement() {
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={handleImageChange}
-              className="w-full p-2 border rounded"
-            />
-            {formData.imagePreview && (
-              <img src={formData.imagePreview} alt="Preview" className="mt-2 h-24 object-contain" />
-            )}
-          </div>
         </div>
         <div className="mt-4">
           <button
@@ -212,8 +249,17 @@ export default function MenuManagement() {
             disabled={loading}
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
           >
-            Add Item
+            {editingItem ? 'Update Item' : 'Add Item'}
           </button>
+          {editingItem && (
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
 
@@ -227,7 +273,6 @@ export default function MenuManagement() {
                 <th className="border px-2 py-1">Name</th>
                 <th className="border px-2 py-1">Category</th>
                 <th className="border px-2 py-1">Price</th>
-                <th className="border px-2 py-1">Image</th>
                 <th className="border px-2 py-1">Remove</th>
               </tr>
             </thead>
@@ -237,11 +282,6 @@ export default function MenuManagement() {
                   <td className="border px-2 py-1">{item.name}</td>
                   <td className="border px-2 py-1 capitalize">{item.category}</td>
                   <td className="border px-2 py-1">{item.price} BIRR</td>
-                  <td className="border px-2 py-1">
-                    {item.imagePreview && (
-                      <img src={item.imagePreview} alt="Preview" className="h-12 object-contain" />
-                    )}
-                  </td>
                   <td className="border px-2 py-1">
                     <button
                       onClick={() => handleRemoveLocal(item.id)}
@@ -273,7 +313,7 @@ export default function MenuManagement() {
               <th className="border px-2 py-1">Name</th>
               <th className="border px-2 py-1">Category</th>
               <th className="border px-2 py-1">Price</th>
-              <th className="border px-2 py-1">Image</th>
+              <th className="border px-2 py-1">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -283,13 +323,18 @@ export default function MenuManagement() {
                 <td className="border px-2 py-1 capitalize">{item.category}</td>
                 <td className="border px-2 py-1">{item.price.toFixed(2)} BIRR</td>
                 <td className="border px-2 py-1">
-                  <Image
-                    src={item.image && item.image.startsWith('/') ? item.image : '/default-menu-image.png'}
-                    alt={item.name}
-                    width={48}
-                    height={48}
-                    className="object-contain"
-                  />
+                  <button
+                    onClick={() => handleEditItem(item)}
+                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteItem(item.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

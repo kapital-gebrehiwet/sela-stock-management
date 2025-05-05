@@ -3,21 +3,24 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../app/api/auth/[...nextauth]/auth';
 import prisma from '@/lib/prisma';
 
-export async function GET(req) {
+export async function GET(request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session) {
-      console.log('Unauthorized access attempt');
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!session || session.user.role !== 'manager') {
+      return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
-    const { searchParams } = new URL(req.url);
+    const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
-    console.log('Received date parameter:', date);
-    
+
     if (!date) {
-      console.log('No date parameter provided');
       return NextResponse.json({ error: 'Date parameter is required' }, { status: 400 });
+    }
+
+    // Validate date format (YYYY-MM-DD)
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(date)) {
+      return NextResponse.json({ error: 'Invalid date format. Use YYYY-MM-DD' }, { status: 400 });
     }
 
     // Create date range for the entire day
@@ -26,14 +29,7 @@ export async function GET(req) {
     const endDate = new Date(date);
     endDate.setUTCHours(23, 59, 59, 999);
 
-    console.log('Query date range:', {
-      start: startDate.toISOString(),
-      end: endDate.toISOString(),
-      managerId: session.user.id
-    });
-
-    // Get sales for the specified date
-    const sales = await prisma.salesReport.findMany({
+    const sales = await prisma.SalesReport.findMany({
       where: {
         createdAt: {
           gte: startDate,
@@ -46,84 +42,79 @@ export async function GET(req) {
       },
     });
 
-    console.log('Found sales:', sales.length);
-    if (sales.length > 0) {
-      console.log('First sale:', {
-        id: sales[0].id,
-        itemName: sales[0].itemName,
-        amount: sales[0].amount,
-        createdAt: sales[0].createdAt,
-        cashAmount: sales[0].cashAmount,
-        transferAmount: sales[0].transferAmount
-      });
+    if (!sales || sales.length === 0) {
+      return NextResponse.json({ sales: [], message: 'No sales found for this date' });
     }
 
     return NextResponse.json({ sales });
   } catch (error) {
-    console.error('Error in GET /api/sales-report:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch sales reports', details: error.message },
-      { status: 500 }
-    );
+    console.error('Error fetching sales:', error);
+    return NextResponse.json({ 
+      error: 'Failed to fetch sales',
+      details: error.message 
+    }, { status: 500 });
   }
 }
 
-export async function POST(req) {
+export async function POST(request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session) {
-      console.log('Unauthorized access attempt');
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!session || session.user.role !== 'manager') {
+      return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
-    const formData = await req.formData();
-    console.log('Received form data:', Object.fromEntries(formData.entries()));
-
+    const formData = await request.formData();
     const itemName = formData.get('itemName');
-    const amount = parseInt(formData.get('amount'));
-    const unitPrice = parseFloat(formData.get('unitPrice'));
-    const totalPrice = parseFloat(formData.get('totalPrice'));
+    const amount = formData.get('amount');
+    const unitPrice = formData.get('unitPrice');
+    const totalPrice = formData.get('totalPrice');
     const date = formData.get('date');
-    const image = formData.get('image');
-    const cashAmount = parseFloat(formData.get('cashAmount') || '0');
-    const transferAmount = parseFloat(formData.get('transferAmount') || '0');
+    const cashAmount = formData.get('cashAmount');
+    const transferAmount = formData.get('transferAmount');
+
+    // Validate required fields
+    if (!itemName || !amount || !unitPrice || !totalPrice || !date) {
+      return NextResponse.json({ 
+        error: 'Missing required fields',
+        missingFields: {
+          itemName: !itemName,
+          amount: !amount,
+          unitPrice: !unitPrice,
+          totalPrice: !totalPrice,
+          date: !date
+        }
+      }, { status: 400 });
+    }
+
+    // Validate date format
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(date)) {
+      return NextResponse.json({ error: 'Invalid date format. Use YYYY-MM-DD' }, { status: 400 });
+    }
 
     // Create a Date object from the provided date string and set to UTC midnight
     const saleDate = new Date(date);
     saleDate.setUTCHours(0, 0, 0, 0);
 
-    console.log('Creating sale with data:', {
-      itemName,
-      amount,
-      unitPrice,
-      totalPrice,
-      date: saleDate.toISOString(),
-      cashAmount,
-      transferAmount,
-      managerId: session.user.id
-    });
-
-    const sale = await prisma.salesReport.create({
+    const sale = await prisma.SalesReport.create({
       data: {
         itemName,
-        amount,
-        unitPrice,
-        totalPrice,
-        image: image ? image : null,
+        amount: parseInt(amount),
+        unitPrice: parseFloat(unitPrice),
+        totalPrice: parseFloat(totalPrice),
+        cashAmount: parseFloat(cashAmount) || 0,
+        transferAmount: parseFloat(transferAmount) || 0,
         managerId: session.user.id,
-        cashAmount,
-        transferAmount,
         createdAt: saleDate,
       },
     });
 
-    console.log('Created sale:', sale);
     return NextResponse.json(sale);
   } catch (error) {
-    console.error('Error in POST /api/sales-report:', error);
-    return NextResponse.json(
-      { error: 'Failed to create sales report', details: error.message },
-      { status: 500 }
-    );
+    console.error('Error creating sale report:', error);
+    return NextResponse.json({ 
+      error: 'Failed to create sale report',
+      details: error.message 
+    }, { status: 500 });
   }
 } 

@@ -33,6 +33,7 @@ export async function POST(request) {
     const amount = parseFloat(formData.get('amount'));
     const description = formData.get('description');
     const receipt = formData.get('receipt');
+    const date = formData.get('date');
     if (!amount || !description) {
       return NextResponse.json({ error: 'Amount and description are required' }, { status: 400 });
     }
@@ -47,12 +48,19 @@ export async function POST(request) {
       await writeFile(filePath, buffer);
       receiptUrl = `/api/uploads/${fileName}`;
     }
+    let createdAt = undefined;
+    if (date) {
+      const d = new Date(date);
+      d.setUTCHours(0, 0, 0, 0);
+      createdAt = d;
+    }
     const expense = await prisma.managerExpense.create({
       data: {
         amount,
         description,
         receipt: receiptUrl,
         managerId: session.user.id,
+        createdAt: createdAt,
       },
     });
     return NextResponse.json(expense);

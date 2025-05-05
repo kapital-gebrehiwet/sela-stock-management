@@ -5,6 +5,11 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import ManagerSidebar from '../../../../components/managersidebar';
 
+// Helper to get YYYY-MM-DD string
+function toYMD(date) {
+  return date.toISOString().slice(0, 10);
+}
+
 export default function ManagerExpensesPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -18,6 +23,7 @@ export default function ManagerExpensesPage() {
     receipt: null
   });
   const [uploading, setUploading] = useState(false);
+  const dateParam = typeof window !== 'undefined' ? window.location.pathname.split('/').pop() : null;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -52,6 +58,7 @@ export default function ManagerExpensesPage() {
       const formDataToSend = new FormData();
       formDataToSend.append('amount', formData.amount);
       formDataToSend.append('description', formData.description);
+      formDataToSend.append('date', dateParam);
       if (formData.receipt) {
         formDataToSend.append('receipt', formData.receipt);
       }
@@ -78,6 +85,11 @@ export default function ManagerExpensesPage() {
     }
   };
 
+  // Filter expenses by the URL date
+  const filteredExpenses = expenses.filter(exp =>
+    toYMD(new Date(exp.createdAt)) === dateParam
+  );
+
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -101,7 +113,7 @@ export default function ManagerExpensesPage() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Total Expenses</h2>
               <span className="text-2xl font-bold text-indigo-600">
-                {totalExpenses.toFixed(2)} birr
+                {filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0).toFixed(2)} birr
               </span>
             </div>
           </div>
@@ -138,6 +150,15 @@ export default function ManagerExpensesPage() {
                   onChange={(e) => setFormData({ ...formData, receipt: e.target.files[0] })}
                   className="mt-1 block w-full"
                   accept="image/*,.pdf"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Date</label>
+                <input
+                  type="text"
+                  value={dateParam}
+                  readOnly
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"
                 />
               </div>
               <button
@@ -177,7 +198,7 @@ export default function ManagerExpensesPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {expenses.map((expense) => (
+                  {filteredExpenses.map((expense) => (
                     <tr key={expense.id}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {new Date(expense.createdAt).toLocaleDateString()}
