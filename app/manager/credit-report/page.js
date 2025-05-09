@@ -4,71 +4,79 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export default function CreditReport() {
+export default function StockEntryPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [creditData, setCreditData] = useState([]);
+  const [monthSelection, setMonthSelection] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/');
     }
-    fetchCreditData();
+    fetchMonthSelection();
   }, [status, router]);
 
-  const fetchCreditData = async () => {
+  const fetchMonthSelection = async () => {
     try {
-      const response = await fetch('/api/credit-report');
+      const response = await fetch('/api/month-selection');
       if (response.ok) {
         const data = await response.json();
-        setCreditData(data);
+        setMonthSelection(data);
       }
     } catch (error) {
-      console.error('Error fetching credit data:', error);
+      console.error('Error fetching month selection:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDateClick = (day) => {
+    const formattedDate = `${monthSelection.year}-${String(monthSelection.month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    router.push(`/manager/credit-report/${formattedDate}`);
   };
 
   if (status === 'loading' || loading) {
     return <div>Loading...</div>;
   }
 
+  if (!monthSelection) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">Credit Report</h1>
+          <div className="bg-white rounded-lg shadow p-6">
+            <p className="text-gray-600">No month has been selected by the owner yet.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const monthName = new Date(2000, monthSelection.month - 1, 1).toLocaleString('default', { month: 'long' });
+  const daysInMonth = new Date(monthSelection.year, monthSelection.month, 0).getDate();
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Credit Report</h1>
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-8">Credit report</h1>
         
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {creditData.map((credit) => (
-                <tr key={credit.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">{new Date(credit.date).toLocaleDateString()}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{credit.customerName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">${credit.amount.toFixed(2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      credit.status === 'Paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {credit.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{new Date(credit.dueDate).toLocaleDateString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-4">
+            {monthName} {monthSelection.year}
+          </h2>
+          
+          <div className="grid grid-cols-7 gap-2">
+            {Array.from({ length: daysInMonth }, (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => handleDateClick(i + 1)}
+                className="p-4 text-center rounded-lg border bg-white hover:bg-gray-50 transition-colors"
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

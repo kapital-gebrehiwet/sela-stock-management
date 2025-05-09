@@ -261,32 +261,27 @@ export default function StaffList() {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {staffData.map((staff) => {
-            const imgSrc =
-              imgError[staff.id]
-                ? '/default-avatar.png'
-                : staff.image
-                  ? staff.image.startsWith('/uploads/')
-                    ? staff.image
-                    : `/uploads/${staff.image}`
-                  : '/default-avatar.png';
-            if (typeof window === 'undefined') {
-              // Server-side log
-              console.log(`Rendering staff card for ${staff.name}, image src: ${imgSrc}`);
-            }
+            // Log the staff data for debugging
+            console.log('Staff data:', staff);
+            
+            // Ensure we're using the correct path from public directory
+            const imgSrc = staff.image
+              ? staff.image.startsWith('/uploads/')
+                ? staff.image
+                : `/uploads/${staff.image}`
+              : 's.png';
+
+            console.log('Attempting to load image from:', imgSrc);
+
             return (
               <div key={staff.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-64 w-full">
-                  <Image
+                <div className="relative h-64 w-full border border-red-500">
+                  <img
                     src={imgSrc}
                     alt={staff.name}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                    onError={() => {
-                      if (typeof window === 'undefined') {
-                        console.error(`Image failed to load for staff: ${staff.name}, attempted src: ${imgSrc}`);
-                      }
-                      setImgError((prev) => ({ ...prev, [staff.id]: true }));
+                    className="object-contain w-full h-full"
+                    onError={(e) => {
+                      e.target.src = '/default-avatar.png';
                     }}
                   />
                 </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { use } from 'react';
+import ManagerSidebar from '../../../../components/managersidebar';
 
 export default function StockLevelDetails({ params }) {
   const { data: session, status } = useSession();
@@ -40,6 +41,13 @@ export default function StockLevelDetails({ params }) {
     }
   };
 
+  // Calculate total stock value
+  const totalStockValue = stockItems.reduce((total, item) => {
+    const amount = parseFloat(item.amount) || 0;
+    const price = parseFloat(item.estimatedPrice) || 0;
+    return total + (amount * price);
+  }, 0);
+
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-100 p-8 flex items-center justify-center">
@@ -71,43 +79,56 @@ export default function StockLevelDetails({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Stock Details for {currentDate}</h1>
-        
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          {stockItems.length === 0 ? (
-            <p className="text-gray-600">No stock items found for this date.</p>
-          ) : (
-            <div className="space-y-4">
-              {stockItems.map((item, index) => (
-                <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                  {item.image && (
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="h-16 w-16 object-cover rounded mr-4"
-                    />
-                  )}
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
-                    <div className="text-sm text-gray-600">
-                      <p>Amount: {item.amount} {item.unit}</p>
-                      <p>Estimated Price: {item.estimatedPrice} Birr</p>
+    <div className="min-h-screen bg-gray-100">
+      <ManagerSidebar />
+      <div className="ml-64 p-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">Stock Details for {currentDate}</h1>
+          
+          <div className="bg-white rounded-lg shadow p-6 mb-8">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold">Total Stock Value</h2>
+              <div className="text-2xl font-bold text-indigo-600">
+                {totalStockValue.toFixed(2)} birr
+              </div>
+            </div>
+
+            {stockItems.length === 0 ? (
+              <p className="text-gray-600">No stock items found for this date.</p>
+            ) : (
+              <div className="space-y-4">
+                {stockItems.map((item, index) => (
+                  <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
+                    {item.image && (
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="h-16 w-16 object-cover rounded mr-4"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold">{item.name}</h3>
+                      <div className="text-sm text-gray-600">
+                        <p>Amount: {item.amount} {item.unit}</p>
+                        <p>Estimated Price: {item.estimatedPrice} birr</p>
+                        <p className="text-indigo-600 font-medium">
+                          Total Value: {(parseFloat(item.amount) * parseFloat(item.estimatedPrice)).toFixed(2)} birr
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-        <button
-          onClick={() => router.push('/manager/stock-level')}
-          className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
-        >
-          Back to Calendar
-        </button>
+          <button
+            onClick={() => router.push('/manager/stock-level')}
+            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+          >
+            Back to Calendar
+          </button>
+        </div>
       </div>
     </div>
   );

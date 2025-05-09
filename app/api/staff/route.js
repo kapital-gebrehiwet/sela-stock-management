@@ -83,11 +83,15 @@ export async function POST(request) {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
         
-        // Get the original extension
+        // Get the original extension and normalize it
         const originalName = image.name;
-        const ext = originalName.substring(originalName.lastIndexOf('.'));
-        // Create a unique filename with the correct extension
-        const filename = `${Date.now()}-${originalName}`;
+        const ext = originalName.substring(originalName.lastIndexOf('.')).toLowerCase();
+        // Normalize extension to .jpg for JPEG files
+        const normalizedExt = ext === '.jpeg' ? '.jpg' : ext;
+        // Create a unique filename with the normalized extension
+        const filename = `${Date.now()}-${originalName.replace(ext, normalizedExt)}`;
+        
+        // Ensure we're using the public/uploads directory
         const uploadDir = path.join(process.cwd(), 'public', 'uploads');
         
         // Ensure the uploads directory exists
@@ -101,8 +105,10 @@ export async function POST(request) {
         const filePath = path.join(uploadDir, filename);
         await writeFile(filePath, buffer);
         
-        imagePath = `/uploads/${filename}`;
-        console.log('Image saved successfully:', imagePath);
+        // Store the path relative to public directory
+        imagePath = `public/uploads/${filename}`;
+        console.log('Image saved successfully at:', filePath);
+        console.log('Image path stored in database:', imagePath);
       } catch (error) {
         console.error('Error saving image:', error);
         return NextResponse.json(

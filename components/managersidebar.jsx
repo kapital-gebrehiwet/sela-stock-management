@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {ChartBar, Home} from "lucide-react"
+import {ChartBar, Home,BanknoteArrowDownIcon,PlusIcon,Sticker,BadgeEuro,CreditCard,PersonStanding} from "lucide-react"
 
 const Managersidebar = () => {
     const pathname = usePathname();
@@ -19,32 +19,32 @@ const Managersidebar = () => {
         },
         {
             name: 'Add Stock',
-            icon: Home,
+            icon: PlusIcon,
             href: '/manager/stock-entry'
         },
         {
             name: 'Stock Level',
-            icon: ChartBar,
+            icon: Sticker,
             href: '/manager/stock-level'
         },
         {
             name: 'Sales Report',
-            icon: ChartBar,
+            icon: BadgeEuro,
             href: '/manager/sales-report'
         },
         {
             name: 'Credit Report',
-            icon: Home,
+            icon:CreditCard,
             href: '/manager/credit-report'
         },
         {
             name: 'Staff List',
-            icon:Home,
+            icon:PersonStanding,
             href: '/manager/staff'
         },
         {
             name: 'Expenses',
-            icon: Home,
+            icon: BanknoteArrowDownIcon,
             href: '/manager/expenses'
         }
     ]
