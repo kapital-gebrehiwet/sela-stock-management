@@ -9,7 +9,7 @@ import Image from 'next/image';
 // Utility function to ensure a valid image path
 function getStaffImage(image) {
   if (!image || image === '' || image === 'null') {
-    return '/default-avatar.png';
+    return '/stock.png';
   }
   // Remove leading slash if present and ensure it starts with /uploads/
   const cleanPath = image.startsWith('/') ? image : `/${image}`;
@@ -40,6 +40,17 @@ export default function StaffPage() {
     };
     fetchStaff();
   }, []);
+
+  // Add this function to calculate total monthly staff expenses
+  const calculateTotalMonthlyExpense = () => {
+    return staff.reduce((total, member) => {
+      // Only include active staff members
+      if (member.status === 'Active') {
+        return total + (member.monthlyFee || 0);
+      }
+      return total;
+    }, 0);
+  };
 
   if (status === 'loading') {
     return (
@@ -75,80 +86,93 @@ export default function StaffPage() {
               {error}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {staff.map((member) => {
-                const imgSrc = getStaffImage(member.image);
-                return (
-                  <div key={member.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div className="flex justify-center items-center bg-gray-50" style={{ minHeight: 180 }}>
-                      <div className="relative w-40 h-40">
-                        <Image
-                          src={imgSrc}
-                          alt={member.name}
-                          width={160}
-                          height={160}
-                          priority
-                          quality={100}
-                          className="object-cover rounded-full border-4 border-white shadow"
-                          style={{ background: '#f3f4f6' }}
-                          onError={(e) => {
-                            console.error(`Image failed to load for staff: ${member.name}`, {
-                              attemptedSrc: imgSrc,
-                              error: e,
-                              target: e.target,
-                              currentSrc: e.target.currentSrc,
-                              naturalWidth: e.target.naturalWidth,
-                              naturalHeight: e.target.naturalHeight,
-                              complete: e.target.complete,
-                              error: e.target.error
-                            });
-                            e.target.src = '/default-avatar.png';
-                          }}
-                        />
-                      </div>
+            <>
+              {/* Add the new summary card */}
+              <div className="mb-8">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-lg font-semibold text-gray-900">Total Monthly Staff Expenses</h2>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {staff.filter(member => member.status === 'Active').length} Active Staff Members
+                      </p>
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-semibold text-gray-900">{member.name}</h2>
-                        <span className={`px-3 py-1 text-sm font-semibold rounded-full ${
-                          member.status === 'Active' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {member.status}
-                        </span>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex items-center text-gray-600">
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                          <span>{member.email}</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span>{member.country}</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span>{member.monthlyFee.toFixed(2)} birr</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          <span className="capitalize">{member.role}</span>
-                        </div>
-                      </div>
+                    <div className="text-right">
+                      <p className="text-3xl font-bold text-indigo-600">
+                        {calculateTotalMonthlyExpense().toFixed(2)} birr
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">Monthly Total</p>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              </div>
+
+              {/* Existing staff grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {staff.map((member) => {
+                  const imgSrc = getStaffImage(member.image);
+                  return (
+                    <div key={member.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                      <div className="flex justify-center items-center bg-gray-50" style={{ minHeight: 180 }}>
+                        <div className="relative w-40 h-40">
+                          <Image
+                            src={imgSrc}
+                            alt={member.name}
+                            width={160}
+                            height={160}
+                            priority
+                            quality={100}
+                            className="object-cover rounded-full border-4 border-white shadow"
+                            style={{ background: '#f3f4f6' }}
+                            onError={(e) => {
+                              e.target.src = '/stock.png';
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <h2 className="text-xl font-semibold text-gray-900">{member.name}</h2>
+                          <span className={`px-3 py-1 text-sm font-semibold rounded-full ${
+                            member.status === 'Active' 
+                              ? 'bg-green-100 text-green-800' 
+                              : 'bg-red-100 text-red-800'
+                          }`}>
+                            {member.status}
+                          </span>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center text-gray-600">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>{member.email}</span>
+                          </div>
+                          <div className="flex items-center text-gray-600">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{member.country}</span>
+                          </div>
+                          <div className="flex items-center text-gray-600">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{member.monthlyFee.toFixed(2)} birr</span>
+                          </div>
+                          <div className="flex items-center text-gray-600">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <span className="capitalize">{member.role}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </div>

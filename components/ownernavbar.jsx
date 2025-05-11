@@ -3,12 +3,12 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { signOut } from 'next-auth/react'
-
+import Link from 'next/link'
 const ownernavbar = () => {
   return (
     <div className='fixed top-0 left-0 right-0 w-full h-16 bg-slate-600 text-white flex justify-between items-center px-4 z-50 shadow-md'>
         <div className='flex items-center'>
-            <h1 className='text-2xl font-bold'>Owner Dashboard</h1>
+            <Link href="/owner"><h1 className='text-2xl font-bold'>Owner Dashboard</h1></Link>
         </div>
         <div className='flex items-center'>
             <Button 

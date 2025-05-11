@@ -1,140 +1,83 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function ManagerDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [monthSelection, setMonthSelection] = useState(null);
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [dailyReport, setDailyReport] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/');
-    }
-  }, [status, router]);
-
-  useEffect(() => {
-    fetchMonthSelection();
-  }, []);
-
-  const fetchMonthSelection = async () => {
-    try {
-      const response = await fetch('/api/month-selection');
-      if (response.ok) {
-        const data = await response.json();
-        setMonthSelection(data);
-      }
-    } catch (error) {
-      console.error('Error fetching month selection:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchDailyReport = async (day) => {
-    try {
-      const response = await fetch(`/api/daily-report?date=${day}`);
-      if (response.ok) {
-        const data = await response.json();
-        setDailyReport(data);
-      }
-    } catch (error) {
-      console.error('Error fetching daily report:', error);
-    }
-  };
-
-  const handleDayClick = (day) => {
-    const formattedDate = `${monthSelection.year}-${String(monthSelection.month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    router.push(`/manager/stock-entry/${formattedDate}`);
-  };
-
-  if (status === 'loading' || loading) {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (!monthSelection) {
-    return (
-      <div className="min-h-screen bg-gray-100 p-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Manager Dashboard</h1>
-          <div className="bg-white rounded-lg shadow p-6">
-            <p className="text-gray-600">No month has been selected by the owner yet.</p>
-          </div>
-        </div>
-      </div>
-    );
+  if (status === 'unauthenticated') {
+    router.push('/');
+    return null;
   }
 
-  const monthName = new Date(2000, monthSelection.month - 1, 1).toLocaleString('default', { month: 'long' });
-  const daysInMonth = new Date(monthSelection.year, monthSelection.month, 0).getDate();
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-white p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Manager Dashboard</h1>
-        
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">
-            {monthName} {monthSelection.year}
-          </h2>
-          
-          <div className="grid grid-cols-7 gap-2">
-            {Array.from({ length: daysInMonth }, (_, i) => (
-              <button
-                key={i + 1}
-                onClick={() => handleDayClick(i + 1)}
-                className={`p-4 text-center rounded-lg border ${
-                  selectedDay === i + 1
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white hover:bg-gray-50'
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
+        <h1 className="text-4xl font-bold text-indigo-700 mb-4">Welcome, Manager!</h1>
+        <p className="text-lg text-gray-700 mb-8">
+          This is your dashboard. Here you can manage daily operations, track sales, monitor stock, handle credits, and record expenses with ease.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+            <span className="text-indigo-600 text-4xl mb-2">📦</span>
+            <h2 className="text-xl font-semibold mb-2">Stock Entry</h2>
+            <p className="text-gray-600 text-center mb-4">
+              Add and manage daily stock entries. Keep your inventory up to date and track all items efficiently.
+            </p>
+            <button
+              onClick={() => router.push('/manager/stock-entry')}
+              className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+            >
+              Go to Stock Entry
+            </button>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+            <span className="text-green-600 text-4xl mb-2">💰</span>
+            <h2 className="text-xl font-semibold mb-2">Sales Report</h2>
+            <p className="text-gray-600 text-center mb-4">
+              View and analyze daily sales reports. Monitor cash and transfer payments, and check for any money deviation.
+            </p>
+            <button
+              onClick={() => router.push('/manager/sales-report')}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              Go to Sales Report
+            </button>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+            <span className="text-yellow-500 text-4xl mb-2">📝</span>
+            <h2 className="text-xl font-semibold mb-2">Credit Report</h2>
+            <p className="text-gray-600 text-center mb-4">
+              Track credits owed and to be received. Record payments and monitor outstanding balances.
+            </p>
+            <button
+              onClick={() => router.push('/manager/credit-report')}
+              className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+            >
+              Go to Credit Report
+            </button>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center hover:shadow-lg transition">
+            <span className="text-pink-500 text-4xl mb-2">💸</span>
+            <h2 className="text-xl font-semibold mb-2">Expenses</h2>
+            <p className="text-gray-600 text-center mb-4">
+              Add and review daily expenses. Upload receipts and keep your spending organized.
+            </p>
+            <button
+              onClick={() => router.push('/manager/expenses')}
+              className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600"
+            >
+              Go to Expenses
+            </button>
           </div>
         </div>
-
-        {selectedDay && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-xl font-semibold mb-4">
-              Report for {monthName} {selectedDay}, {monthSelection.year}
-            </h3>
-            
-            {dailyReport ? (
-              <div className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h4 className="font-medium text-gray-700">Sales</h4>
-                    <p className="text-2xl font-bold">${dailyReport.sales.toFixed(2)}</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h4 className="font-medium text-gray-700">Credit</h4>
-                    <p className="text-2xl font-bold">${dailyReport.credit.toFixed(2)}</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <h4 className="font-medium text-gray-700">Expenses</h4>
-                    <p className="text-2xl font-bold">${dailyReport.expenses.toFixed(2)}</p>
-                  </div>
-                </div>
-                
-                {dailyReport.notes && (
-                  <div className="mt-4">
-                    <h4 className="font-medium text-gray-700 mb-2">Notes</h4>
-                    <p className="text-gray-600">{dailyReport.notes}</p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="text-gray-600">No report available for this day.</p>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

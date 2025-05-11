@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import ManagerSidebar from '../../../../components/managersidebar';
+import Link from 'next/link';
 
 export default function SaleReportPage() {
   const { data: session, status } = useSession();
@@ -288,6 +289,7 @@ export default function SaleReportPage() {
               <div className="text-sm text-gray-600">
                 <span className="font-semibold">Total Items:</span> {totalItems}
               </div>
+              <button onClick={()=>router.push('/manager/sales-report')} className="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">Back to calender</button>
             </div>
           </div>
           {/* Total Sales Card */}

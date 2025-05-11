@@ -186,13 +186,12 @@ export default function CreditReportDatePage() {
   const filteredCredits = credits.filter(credit => {
     const creditDate = new Date(credit.dueDate).toISOString().slice(0, 10);
     const selectedDate = new Date(date).toISOString().slice(0, 10);
-    
-    // If credit is from the selected date, show it regardless of status
+
+    // Show all credits for the selected date
     if (creditDate === selectedDate) {
       return true;
     }
-    
-    // If credit is from a previous date, only show it if it's unpaid
+    // Carry over only unpaid credits from previous dates
     return creditDate < selectedDate && credit.status !== 'Paid';
   });
 
@@ -210,94 +209,89 @@ export default function CreditReportDatePage() {
   return (
     <div className="min-h-screen bg-gray-100">
       <ManagerSidebar />
-      <div className="ml-64 p-8">
+      <div className="md:ml-64 p-2 md:p-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Credit Report</h1>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 md:mb-8 gap-2 md:gap-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Credit Report</h1>
             <button
               onClick={() => router.push('/manager/credit-report')}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+              className="bg-gray-500 text-white px-3 py-2 md:px-4 md:py-2 rounded-md hover:bg-gray-600 text-sm md:text-base"
             >
               Back to Calendar
             </button>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <div className="flex flex-col space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold">Credit Summary for {date}</h2>
+          <div className="bg-white rounded-lg shadow p-3 md:p-6 mb-4 md:mb-8">
+            <div className="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+              <div className="flex-1 bg-gray-50 p-3 md:p-4 rounded-lg mb-2 md:mb-0">
+                <h3 className="text-xs md:text-sm font-medium text-gray-500">Total Active Credits</h3>
+                <p className="text-lg md:text-2xl font-bold text-indigo-600">
+                  {activeCredits.reduce((sum, credit) => sum + credit.remaining, 0).toFixed(2)} birr
+                </p>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="text-sm font-medium text-gray-500">Total Active Credits</h3>
-                  <p className="text-2xl font-bold text-indigo-600">
-                    {activeCredits.reduce((sum, credit) => sum + credit.remaining, 0).toFixed(2)} birr
-                  </p>
-                </div>
-                <div className="bg-red-50 p-4 rounded-lg">
-                  <h3 className="text-sm font-medium text-gray-500">Money Owed</h3>
-                  <p className="text-2xl font-bold text-red-600">
-                    {activeCredits
-                      .filter(credit => credit.type === 'OWED')
-                      .reduce((sum, credit) => sum + credit.remaining, 0)
-                      .toFixed(2)} birr
-                  </p>
-                </div>
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <h3 className="text-sm font-medium text-gray-500">Money to Receive</h3>
-                  <p className="text-2xl font-bold text-green-600">
-                    {activeCredits
-                      .filter(credit => credit.type === 'TO_RECEIVE')
-                      .reduce((sum, credit) => sum + credit.remaining, 0)
-                      .toFixed(2)} birr
-                  </p>
-                </div>
+              <div className="flex-1 bg-red-50 p-3 md:p-4 rounded-lg mb-2 md:mb-0">
+                <h3 className="text-xs md:text-sm font-medium text-gray-500">Money Owed</h3>
+                <p className="text-lg md:text-2xl font-bold text-red-600">
+                  {activeCredits
+                    .filter(credit => credit.type === 'OWED')
+                    .reduce((sum, credit) => sum + credit.remaining, 0)
+                    .toFixed(2)} birr
+                </p>
+              </div>
+              <div className="flex-1 bg-green-50 p-3 md:p-4 rounded-lg">
+                <h3 className="text-xs md:text-sm font-medium text-gray-500">Money to Receive</h3>
+                <p className="text-lg md:text-2xl font-bold text-green-600">
+                  {activeCredits
+                    .filter(credit => credit.type === 'TO_RECEIVE')
+                    .reduce((sum, credit) => sum + credit.remaining, 0)
+                    .toFixed(2)} birr
+                </p>
               </div>
             </div>
           </div>
 
           {/* Add Credit Form */}
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">Add New Credit Entry</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="bg-white rounded-lg shadow p-3 md:p-6 mb-4 md:mb-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Add New Credit Entry</h2>
+            <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Name</label>
+                <label className="block text-xs md:text-sm font-medium text-gray-700">Name</label>
                 <input
                   type="text"
                   value={formData.personName}
                   onChange={(e) => setFormData({ ...formData, personName: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs md:text-base"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Amount (birr)</label>
+                <label className="block text-xs md:text-sm font-medium text-gray-700">Amount (birr)</label>
                 <input
                   type="number"
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs md:text-base"
                   required
                   min="0"
                   step="0.01"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Purpose</label>
+                <label className="block text-xs md:text-sm font-medium text-gray-700">Purpose</label>
                 <textarea
                   value={formData.purpose}
                   onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs md:text-base"
                   rows="2"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Type</label>
+                <label className="block text-xs md:text-sm font-medium text-gray-700">Type</label>
                 <select
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs md:text-base"
                 >
                   <option value="OWED">Money Owed to Others</option>
                   <option value="TO_RECEIVE">Money to Receive</option>
@@ -305,7 +299,7 @@ export default function CreditReportDatePage() {
               </div>
               <button
                 type="submit"
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-indigo-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-base"
                 disabled={uploading}
               >
                 {uploading ? 'Adding...' : 'Add Credit Entry'}
@@ -314,72 +308,54 @@ export default function CreditReportDatePage() {
           </div>
 
           {/* Credits History */}
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <h2 className="text-xl font-semibold p-6">Credit History</h2>
+          <div className="bg-white rounded-lg shadow overflow-x-auto">
+            <h2 className="text-lg md:text-xl font-semibold p-3 md:p-6">Credit History</h2>
             {error && (
               <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded m-6">
                 {error}
               </div>
             )}
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
+            <div className="min-w-[700px] md:min-w-0">
+              <table className="min-w-full divide-y divide-gray-200 text-xs md:text-sm">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Name
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Total Amount
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Paid Amount
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Remaining
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Purpose
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Type
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Due Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paid Amount</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remaining</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="px-2 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {creditsWithPayments.map((credit) => (
                     <React.Fragment key={credit.id}>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-900">
                           {credit.personName}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-900">
                           {credit.amount.toFixed(2)} birr
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-900">
                           {credit.totalPaid.toFixed(2)} birr
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-900">
                           {credit.remaining.toFixed(2)} birr
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-2 md:px-6 py-3 text-sm text-gray-500">
                           {credit.purpose}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                           {credit.type === 'OWED' ? 'Money Owed' : 'To Receive'}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                           {new Date(credit.dueDate).toLocaleDateString()}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm">
                           <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                             credit.status === 'Paid' ? 'bg-green-100 text-green-800' :
                             credit.status === 'Overdue' ? 'bg-red-100 text-red-800' :
@@ -388,7 +364,7 @@ export default function CreditReportDatePage() {
                             {credit.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <td className="px-2 md:px-6 py-3 whitespace-nowrap text-sm">
                           {credit.remaining > 0 && (
                             <button
                               onClick={() => openPaymentModal(credit)}
@@ -401,7 +377,7 @@ export default function CreditReportDatePage() {
                       </tr>
                       {credit.payments && credit.payments.length > 0 && (
                         <tr>
-                          <td colSpan="9" className="px-6 py-2 bg-gray-50">
+                          <td colSpan="9" className="px-2 md:px-6 py-2 bg-gray-50">
                             <div className="text-sm text-gray-600">
                               <div className="font-medium mb-1">Payment History:</div>
                               <div className="space-y-1">
@@ -442,10 +418,10 @@ export default function CreditReportDatePage() {
 
       {/* Payment Modal */}
       {showPaymentModal && selectedCredit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full">
-            <h2 className="text-xl font-semibold mb-4">Record Payment</h2>
-            <div className="space-y-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-4 md:p-6 max-w-md w-full mx-2">
+            <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Record Payment</h2>
+            <div className="space-y-2 md:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Amount</label>
                 <input
@@ -525,16 +501,16 @@ export default function CreditReportDatePage() {
                 </div>
               ) : null}
 
-              <div className="flex justify-end space-x-3 mt-6">
+              <div className="flex justify-end space-x-2 md:space-x-3 mt-4 md:mt-6">
                 <button
                   onClick={() => setShowPaymentModal(false)}
-                  className="px-4 py-2 border rounded hover:bg-gray-50"
+                  className="px-3 py-2 border rounded hover:bg-gray-50 text-xs md:text-base"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handlePayment}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  className="px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-xs md:text-base"
                   disabled={!paymentData.amount || loading}
                 >
                   {loading ? 'Recording...' : 'Record Payment'}

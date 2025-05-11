@@ -3,85 +3,56 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import ManagerSidebar from '../../../../components/managersidebar';
+import OwnerSidebar from '../../../../components/ownersidebar';
 
 // Helper to get YYYY-MM-DD string
 function toYMD(date) {
   return date.toISOString().slice(0, 10);
 }
 
-export default function ManagerExpensesPage() {
+// Helper to validate YYYY-MM-DD
+function isValidDateString(str) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(str);
+}
+
+export default function OwnerExpenseReportPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalExpenses, setTotalExpenses] = useState(0);
-  const [formData, setFormData] = useState({
-    amount: '',
-    description: '',
-    receipt: null
-  });
-  const [uploading, setUploading] = useState(false);
+
+  // Get date from URL
   const dateParam = typeof window !== 'undefined' ? window.location.pathname.split('/').pop() : null;
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/');
-    } else if (status === 'authenticated') {
+    } else if (status === 'authenticated' && isValidDateString(dateParam)) {
       fetchExpenses();
+    } else if (status === 'authenticated') {
+      setLoading(false);
+      setError('No valid date selected.');
     }
-  }, [status, router]);
+    // eslint-disable-next-line
+  }, [status, router, dateParam]);
 
   const fetchExpenses = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      const response = await fetch('/api/manager-expenses');
+      const response = await fetch(`/api/owner/expense-report?date=${dateParam}`);
       if (response.ok) {
         const data = await response.json();
         setExpenses(data);
-        const total = data.reduce((sum, expense) => sum + expense.amount, 0);
-        setTotalExpenses(total);
       } else {
-        throw new Error('Failed to fetch expenses');
+        const errData = await response.json();
+        throw new Error(errData.error || 'Failed to fetch expenses');
       }
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setUploading(true);
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('amount', formData.amount);
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('date', dateParam);
-      if (formData.receipt) {
-        formDataToSend.append('receipt', formData.receipt);
-      }
-
-      const response = await fetch('/api/manager-expenses', {
-        method: 'POST',
-        body: formDataToSend,
-      });
-
-      if (response.ok) {
-        const newExpense = await response.json();
-        setExpenses([newExpense, ...expenses]);
-        setTotalExpenses(prevTotal => prevTotal + parseFloat(formData.amount));
-        setFormData({ amount: '', description: '', receipt: null });
-        setError(null);
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to add expense');
-      }
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setUploading(false);
     }
   };
 
@@ -98,6 +69,23 @@ export default function ManagerExpensesPage() {
     );
   }
 
+  if (!isValidDateString(dateParam)) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded shadow text-center">
+          <h2 className="text-xl font-semibold mb-2 text-gray-700">No Date Selected</h2>
+          <p className="text-gray-500 mb-4">Please select a date from the calendar to view expenses.</p>
+          <button
+            onClick={() => router.push('/owner/expense-report')}
+            className="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700"
+          >
+            Back to Calendar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (status === 'unauthenticated') {
     router.push('/');
     return null;
@@ -105,7 +93,7 @@ export default function ManagerExpensesPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <ManagerSidebar />
+      <OwnerSidebar />
       <div className="ml-64 p-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Daily Expenses</h1>
@@ -115,63 +103,14 @@ export default function ManagerExpensesPage() {
               <span className="text-2xl font-bold text-indigo-600">
                 {filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0).toFixed(2)} birr
               </span>
-              <button onClick={()=>router.push('/manager/sales-report')} className="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">Back to calender</button>
+              <button
+                onClick={() => router.push('/owner/expense-report')}
+                className="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+              >
+                Back to Calendar
+              </button>
             </div>
           </div>
-          {/* Add Expense Form */}
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">Add New Expense</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Amount (birr)</label>
-                <input
-                  type="number"
-                  value={formData.amount}
-                  onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                  min="0"
-                  step="0.01"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  rows="2"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Receipt/Evidence (optional)</label>
-                <input
-                  type="file"
-                  onChange={(e) => setFormData({ ...formData, receipt: e.target.files[0] })}
-                  className="mt-1 block w-full"
-                  accept="image/*,.pdf"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Date</label>
-                <input
-                  type="text"
-                  value={dateParam}
-                  readOnly
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 cursor-not-allowed"
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={uploading}
-              >
-                {uploading ? 'Adding...' : 'Add Expense'}
-              </button>
-            </form>
-          </div>
-
           {/* Expenses History */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <h2 className="text-xl font-semibold p-6">Expense History</h2>
@@ -226,6 +165,13 @@ export default function ManagerExpensesPage() {
                       </td>
                     </tr>
                   ))}
+                  {filteredExpenses.length === 0 && (
+                    <tr>
+                      <td colSpan={4} className="text-center text-gray-400 py-8">
+                        No expenses found for this date.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -234,4 +180,4 @@ export default function ManagerExpensesPage() {
       </div>
     </div>
   );
-} 
+}
