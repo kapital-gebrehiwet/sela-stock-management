@@ -1,10 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
-export default function AuthError() {
+function ErrorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const error = searchParams.get('error');
@@ -41,5 +42,22 @@ export default function AuthError() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthError() {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mt-4"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ErrorContent />
+    </Suspense>
   );
 } 
